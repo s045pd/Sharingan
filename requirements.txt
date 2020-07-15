@@ -1,0 +1,6 @@
+python_box==4.2.3
+requests_html==0.10.0
+termcolor==1.1.0
+Click==7.0
+httpx==0.13.3
+progressbar33==2.4
