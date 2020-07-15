@@ -13,6 +13,8 @@
 
 ## 环境安装
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f00d1d69a99346038d14df4bec303034)](https://app.codacy.com/manual/aoii103/Sharingan?utm_source=github.com&utm_medium=referral&utm_content=aoii103/Sharingan&utm_campaign=Badge_Grade_Dashboard)
+
 首先保证您已经安装了```python3.8```及以上版本,然后依次运行如下命令。
 
 ```sh
