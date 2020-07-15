@@ -32,7 +32,7 @@ class Extractor:
         yield T
 
     @staticmethod
-    def __zhihu() -> Generator:
+    def zhihu() -> Generator:
         T = yield from upload(
             **{
                 "url": "https://www.zhihu.com/people/{}",
@@ -52,36 +52,36 @@ class Extractor:
         ]
         yield T
 
-    @staticmethod
-    def __v2ex() -> Generator:
-        T = yield from upload({"url": "https://www.v2ex.com/member/{}"})
+    # @staticmethod
+    # def __v2ex() -> Generator:
+    #     T = yield from upload({"url": "https://www.v2ex.com/member/{}"})
 
-    @staticmethod
-    def __facebook() -> Generator:
-        T = yield from upload(**{"url": "https://www.facebook.com/{}", "proxy": True})
-        _ = T.html.pq("#pagelet_timeline_main_column")
+    # @staticmethod
+    # def __facebook() -> Generator:
+    #     T = yield from upload(**{"url": "https://www.facebook.com/{}", "proxy": True})
+    #     _ = T.html.pq("#pagelet_timeline_main_column")
 
-        T.name = _("#fb-timeline-cover-name").text()
-        T.avatar = _(".photoContainer img:nth-child(1)").attr("src")
-        T.sign = _("#intro_container_id").text()
-        T.extra = loads(T.html.xpath('//script[@type="application/ld+json"]')[0].text)
-        T.extra2 = [item.text() for item in _(".uiList > li ")]
-        yield T
+    #     T.name = _("#fb-timeline-cover-name").text()
+    #     T.avatar = _(".photoContainer img:nth-child(1)").attr("src")
+    #     T.sign = _("#intro_container_id").text()
+    #     T.extra = loads(T.html.xpath('//script[@type="application/ld+json"]')[0].text)
+    #     T.extra2 = [item.text() for item in _(".uiList > li ")]
+    #     yield T
 
-    @staticmethod
-    def youtube() -> Generator:
-        T = yield from upload(
-            **{"url": "https://www.youtube.com/{}/about", "proxy": True}
-        )
+    # @staticmethod
+    # def youtube() -> Generator:
+    #     T = yield from upload(
+    #         **{"url": "https://www.youtube.com/{}/about", "proxy": True}
+    #     )
 
-        header = T.html.pq("#channel-header")
-        contents = T.html.pq("#contents")
+    #     header = T.html.pq("#channel-header")
+    #     contents = T.html.pq("#contents")
 
-        T.name = header("#text-container").text()
-        T.avatar = header("img.yt-img-shadow").attr("src")
-        T.sign = contents("#description").text()
+    #     T.name = header("#text-container").text()
+    #     T.avatar = header("img.yt-img-shadow").attr("src")
+    #     T.sign = contents("#description").text()
 
-        breakpoint()
+    #     yield T
 
     # @staticmethod
     # def __twitter():
