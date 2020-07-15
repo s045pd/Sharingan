@@ -37,7 +37,7 @@ I have considered using `JSON` as the site's configuration file, but later wrote
 
 And what we need to do is add the following method under class `Extractor`, where the `def upload` method stores the basic configuration of the corresponding site
 
-For optional configurations, see [`models.py`](models.py)  -> class `config` 
+For optional configurations, see [`models.py`](https://github.com/aoii103/Sharingan/blob/master/sharingan/models.py#L25)
 
 
 ```python

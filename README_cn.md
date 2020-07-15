@@ -37,7 +37,7 @@ python3 worker.py blue
 
 我们需要做的是在 `class Extractor` 下添加如下方法，其中 `upload` 方法中存放对应站点的基础配置
 
-可选配置详见 [`models.py`](models.py) 的 `config` 类
+可选配置详见 [`models.py`](https://github.com/aoii103/Sharingan/blob/master/sharingan/models.py#L25)
 
 
 ```python
