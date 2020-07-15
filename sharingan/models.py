@@ -3,8 +3,9 @@
     We will try to find your visible basic footprint from social media as much as possible
 """
 from httpx import Response
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, unique
+from typing import Dict, Set
 
 
 class error_types:
@@ -34,6 +35,7 @@ class config:
     """
 
     url: str
+    available: bool = False
     method: str = "get"
     data: str = None
     json: str = None
@@ -47,24 +49,34 @@ class config:
 
 @dataclass
 class person:
+    key: str
     source: str
     resp: object
     html: object
     conf: dict
+    debug: bool = False
     _name: str = ""
+    _age: int = 0
+    _gender: int = 1
     _sign: str = ""
     _avatar: str = ""
     _avatar_b64: str = ""
-    _extras: dict = None
+    _locations: Set[str] = field(default_factory=set)
+    _websites: Set[str] = field(default_factory=set)
+    _extras: Dict = field(default_factory=dict)
 
     def report(self):
-        return {
+        results = {
             "name": self._name,
             "sign": self._sign,
             "avatar": self._avatar_b64,
-            "html": self.html.text,
-            "headers": dict(self.resp.headers),
+            "locations": list(self._locations),
+            "websites": list(self._websites),
+            "extra": self._extras,
         }
+        if self.debug:
+            results.update({"html": self.html.text, "headers": dict(self.resp.headers)})
+        return results
 
     @property
     def name(self) -> str:
@@ -98,6 +110,25 @@ class person:
     @avatar_b64.setter
     def avatar_b64(self, v: str) -> None:
         self._avatar_b64 = v
+
+    @property
+    def location(self) -> str:
+        return self._locations
+
+    @location.setter
+    def location(self, v: str) -> None:
+        self._locations.add(v)
+
+    @property
+    def website(self) -> str:
+        return self._websites
+
+    @website.setter
+    def website(self, v: str) -> None:
+        self._websites.add(v)
+
+    def extra(self, k, v: dict) -> None:
+        self._extras[k] = v
 
 
 @unique

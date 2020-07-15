@@ -5,11 +5,13 @@
 import asyncio
 from pathlib import Path
 from base64 import b64encode
-from dataclasses import dataclass
 from itertools import product
 from pprint import pprint
 from json import dumps
+import moment
 
+from dataclasses import dataclass, field
+from typing import List, Dict, Set
 import click
 import httpx
 from progressbar import ProgressBar
@@ -26,18 +28,31 @@ class StareAt:
     proxy: str
     save_path: str = "./events"
     pass_history: bool = False
+    singel: str = ""
+    debug: bool = False
+
     max_keepalive: int = 5
     max_conns: int = 101
+
     image_available_key = {"avatar", "images"}
     save_block_keys = {"resp", "html", "conf"}
 
-    sites = list(filter(lambda _: "__" not in _, dir(Extractor)))
-    datas = {}
+    sites: List[str] = field(init=False)
+    datas: Dict = field(default_factory=dict)
 
-    def mount(self) -> None:
+    def __post_init__(self):
         """
-            init other configurations
+            other datas init
         """
+        if self.singel:
+            try:
+                getattr(Extractor, self.singel)
+                self.sites = [self.singel]
+            except AttributeError:
+                pass
+        else:
+            self.sites = list(filter(lambda _: "__" not in _, dir(Extractor)))
+
         self.save_path = Path(self.save_path)
         self.save_path.mkdir(exist_ok=True)
         limits = httpx.PoolLimits(
@@ -68,7 +83,9 @@ class StareAt:
                 req = client.get(url, headers=data.headers, cookies=data.cookies)
             resp = await req
             self.assert_proccess(resp, data)
-            pure_info = target.send((key, resp, HTML(html=resp.text), data))
+            pure_info = target.send(
+                (self.name, key, resp, HTML(html=resp.text), data, self.debug)
+            )
             await self.loop_images(client, pure_info)
             self.datas[key] = pure_info
         except AssertionError:
@@ -125,15 +142,15 @@ class StareAt:
         times = 0
         for key in self.image_available_key:
             try:
-                image_source = getattr(data, key)
+                params = getattr(data, key)
             except AttributeError:
                 continue
-            if isinstance(image_source, str):
-                image = await self.fetch_image_b64(client, image_source)
+            if isinstance(params, str) and params:
+                image = await self.fetch_image_b64(client, params)
                 setattr(data, f"{key}_b64", image)
             elif isinstance(params, (list, tuple, set)):
                 await asyncio.gather(
-                    self.fetch_image_b64(client, _) for _ in image_source
+                    self.fetch_image_b64(client, _) for _ in params if _
                 )
 
     async def loop(self) -> None:
@@ -153,12 +170,16 @@ class StareAt:
         """
             save or export the results
         """
+        save_flag = False
         for key, val in self.datas.items():
             if isinstance(val, dict):
                 error(f'{key}: {val["error"]}')
             elif isinstance(val, object):
                 success(f"{key}[{val.resp.url}]: {val._name}")
+                save_flag = True
 
+        if not save_flag:
+            return
         filename = f'{self.name +  ( str(moment.now().format("YYYY-MM-DD HH:mm:ss"))  if self.pass_history else "" ) }.json'
         filepath = self.save_path / filename
         final_data = {
@@ -171,7 +192,6 @@ class StareAt:
             info(f"datas saved to: {filepath}")
 
     def run(self) -> None:
-        self.mount()
         asyncio.run(self.loop())
         self.save()
 
@@ -181,8 +201,12 @@ class StareAt:
 @click.option("--proxy", default="http://127.0.0.1:1087")
 @click.option("--save_path", default="../events")
 @click.option("--pass_history", is_flag=True)
-def main(name: str, proxy: str, save_path: str, pass_history: bool) -> None:
-    StareAt(name, proxy, save_path).run()
+@click.option("--singel", default="")
+@click.option("--debug", is_flag=True)
+def main(
+    name: str, proxy: str, save_path: str, pass_history: bool, singel: str, debug: bool
+) -> None:
+    StareAt(name, proxy, save_path, pass_history, singel, debug).run()
 
 
 if __name__ == "__main__":
