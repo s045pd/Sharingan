@@ -3,7 +3,7 @@
     <h1 align="center" >Sharingan</h1>
     <p align="center">我们将尽可能得从社交媒体中寻找您的基本可见足迹</p>
         <p align="center">
-    <a href="https://www.codacy.com/manual/aoii103/Sharingan?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aoii103/Sharingan&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/cb6b7e771f5b4cf8a2f7d65aa42a32bf"/></a>
+    <a href="https://app.codacy.com/manual/aoii103/Sharingan?utm_source=github.com&utm_medium=referral&utm_content=aoii103/Sharingan&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/f00d1d69a99346038d14df4bec303034"/></a>
     <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.8-green.svg"></a>
     <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 </p>
