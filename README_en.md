@@ -11,7 +11,7 @@
 
 
 
-## Environmental
+# Environmental
 
 First, ensure that you have installed the ```python3.8+``` , and then run the following commands.
 
@@ -24,7 +24,7 @@ python3 -m pip install -r requirements.txt
 ```
 
 
-## Usage
+# Usage
 
 ```sh
 python3 worker.py blue
@@ -33,11 +33,11 @@ python3 worker.py blue
 
 
 
-## TODO
+# TODO
 
-- Formatted output
+-  Formatted output
 
-## 📝 License
+# 📝 License
 
 This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
 

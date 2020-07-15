@@ -1,3 +1,7 @@
+"""
+    Sharingan project
+    We will try to find your visible basic footprint from social media as much as possible
+"""
 import asyncio
 from base64 import b64encode
 from json import loads

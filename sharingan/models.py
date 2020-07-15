@@ -1,9 +1,10 @@
+"""
+    Sharingan project
+    We will try to find your visible basic footprint from social media as much as possible
+"""
 from httpx import Response
-from collections import defaultdict
 from dataclasses import dataclass
 from enum import Enum, unique
-
-from box import Box
 
 
 class error_types:
