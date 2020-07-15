@@ -1,7 +1,7 @@
 <p align="center">
 <img src="medias/main.jpeg" width=177 height=100 />
     <h1 align="center" >Sharingan</h1>
-    <p align="center"> We will try to find your visible basic footprint from social media as much as possible</p>
+    <p align="center">我们将尽可能得从社交媒体中寻找您的基本可见足迹</p>
         <p align="center">
     <a href="https://app.codacy.com/manual/aoii103/Sharingan?utm_source=github.com&utm_medium=referral&utm_content=aoii103/Sharingan&utm_campaign=Badge_Grade_Dashboard"><img src="https://api.codacy.com/project/badge/Grade/f00d1d69a99346038d14df4bec303034"/></a>
     <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.8-green.svg"></a>
@@ -9,11 +9,11 @@
 </p>
 
 
-> 中文版: [Readme_cn](README_cn.md) 
 
-# Environmental
 
-First, ensure that you have installed the ```python3.8+``` , and then run the following commands.
+# 环境安装
+
+首先保证您已经安装了```python3.8```及以上版本,然后依次运行如下命令。
 
 ```sh
 git clone https://github.com/aoii103/Sharingan.git
@@ -24,20 +24,20 @@ python3 -m pip install -r requirements.txt
 ```
 
 
-# Usage
+# 案例用法
 
 ```sh
 python3 worker.py blue
 
 ```
 
-# Add New Targets
+# 添加新站点
 
-I have considered using `JSON` as the site's configuration file, but later wrote it in `extract.py`
+我有曾考虑过使用 `json` 作为站点的配置文件，但后来还是把它写在了 `extract.py`中
 
-And what we need to do is add the following method under class `Extractor`, where the `def upload` method stores the basic configuration of the corresponding site
+我们需要做的是在 `class Extractor` 下添加如下方法，其中 `upload` 方法中存放对应站点的基础配置
 
-For optional configurations, see [`models.py`](models.py)  -> class `config` 
+可选配置详见 [`models.py`](models.py) 的 `config` 类
 
 
 ```python
@@ -65,7 +65,7 @@ For optional configurations, see [`models.py`](models.py)  -> class `config`
 
 # TODO
 
--  Formatted output
+- 格式化输出
 
 # 📝 License
 
@@ -73,4 +73,4 @@ This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/mast
 
 ***
 
-If you think this script is useful to you, don't forget star 🐶. Inspired by ❤️ [sherlock](https://github.com/sherlock-project/sherlock)
+如果您觉得这个脚本对您有用，可别忘了star哟🐶。灵感来自 ❤️ [sherlock](https://github.com/sherlock-project/sherlock)
