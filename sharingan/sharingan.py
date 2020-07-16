@@ -6,7 +6,7 @@ import asyncio
 from base64 import b64decode, b64encode
 from dataclasses import dataclass, field
 from itertools import product
-from json import dumps
+from json import dumps, loads
 from pathlib import Path
 from pprint import pprint
 from typing import Dict, List, Set
@@ -32,6 +32,7 @@ class StareAt:
     pass_history: bool = False
     singel: str = ""
     debug: bool = False
+    update: bool = False
 
     max_keepalive: int = 5
     max_conns: int = 101
@@ -207,6 +208,13 @@ class StareAt:
                 continue
             with (avatar_path / f"{key}.jpeg").open("wb") as img:
                 img.write(b64decode(val.avatar_b64))
+
+        if self.update and file_path.exists():
+            with file_path.open("r") as file:
+                raw_data = loads(file.read())
+                raw_data.update(final_data)
+                final_data = raw_data
+
         with file_path.open("w") as file:
             file.write(dumps(final_data, indent=4, ensure_ascii=False))
             info(f"datas saved to: {str(file_path.absolute())}")
@@ -242,6 +250,9 @@ class StareAt:
     help="Commonly used for single target information acquisition or testing",
 )
 @click.option("--debug", is_flag=True, help="Debug model")
+@click.option(
+    "--update", is_flag=True, help="Do not overwrite the original data results"
+)
 def main(
     name: str,
     proxy_uri: str,
@@ -250,8 +261,11 @@ def main(
     pass_history: bool,
     singel: str,
     debug: bool,
+    update: bool,
 ) -> None:
-    StareAt(name, proxy_uri, no_proxy, save_path, pass_history, singel, debug).run()
+    StareAt(
+        name, proxy_uri, no_proxy, save_path, pass_history, singel, debug, update
+    ).run()
 
 
 if __name__ == "__main__":
