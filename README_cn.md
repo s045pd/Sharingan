@@ -62,6 +62,19 @@ python3 worker.py blue
 
 ```
 
+# 单项测试
+
+偶尔我们在编写添加新站点后需要进行测试
+
+就可以用到如下代码，例如我们要测试 `twitter`
+
+```bash
+
+python3 worker.py --singel=twitter --name=larry  
+
+```
+
+
 
 # TODO
 

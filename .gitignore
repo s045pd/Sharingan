@@ -8,6 +8,7 @@ ghostdriver.log
 testspace/
 events/
 dataset/
+templates.py
 
 *.swp
 *.info

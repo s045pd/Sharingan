@@ -62,6 +62,17 @@ For optional configurations, see [`models.py`](https://github.com/aoii103/Sharin
 
 ```
 
+# Singel Test
+
+Sometimes we need to test for a new site
+
+And we can use the following code . for example, when the target is `twitter`
+
+```bash
+
+python3 worker.py --singel=twitter --name=larry  
+```
+
 
 # TODO
 
