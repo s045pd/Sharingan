@@ -2,10 +2,11 @@
     Sharingan project
     We will try to find your visible basic footprint from social media as much as possible
 """
-from httpx import Response
 from dataclasses import dataclass, field
 from enum import Enum, unique
 from typing import Dict, Set
+
+from httpx import Response
 
 
 class error_types:
@@ -35,7 +36,6 @@ class config:
     """
 
     url: str
-    available: bool = False
     method: str = "get"
     data: str = None
     json: str = None
@@ -55,6 +55,7 @@ class person:
     html: object
     conf: dict
     debug: bool = False
+    available: bool = True
     _name: str = ""
     _age: int = 0
     _gender: int = 1

@@ -8,13 +8,25 @@ from json import loads
 from typing import Generator
 from urllib.parse import urljoin
 
+import moment
 from box import Box
 
 from models import config, person
 
+# from common import str_to_num
+
 
 def upload(*args, **kwargs):
     return person(*(yield config(*args, **kwargs)))
+
+
+def xpath(T, path):
+    try:
+        target = T.html.xpath(path)
+        assert len(target) > 0
+        return target
+    except:
+        return [Box({"text": ""})]
 
 
 class Extractor:
@@ -63,19 +75,25 @@ class Extractor:
         )
         card = T.html.pq(".h-card")
 
-        x = lambda item: T.html.xpath(item)
-
         T.name = card(".p-name").text()
         T.avatar = card(".avatar").attr("src")
         T.sign = card(".p-note").text()
-        T.location = x("//li[@itemprop='homeLocation']")[0].text
-        T.website = x("//li[@data-test-selector='profile-website-url']")[0].text
+        T.location = xpath(T, "//li[@itemprop='homeLocation']")[0].text
+        T.website = xpath(T, "//li[@data-test-selector='profile-website-url']")[0].text
 
         T.extra("status", card("div.ws-normal.user-status-message-wrapper").text())
-        T.extra("repo_nums", x(f"//a[@href='/{T.key}?tab=repositories']/span")[0].text)
-        T.extra("followers", x(f"//a[@href='/{T.key}?tab=followers']/span")[0].text)
-        T.extra("following", x(f"//a[@href='/{T.key}?tab=following']/span")[0].text)
-        T.extra("stars", x(f"//a[@href='/{T.key}?tab=stars']/span")[0].text)
+        T.extra("email", xpath(T, "//li[@itemprop='email']")[0].text)
+        T.extra(
+            "repo_nums",
+            xpath(T, f"//a[@href='/{T.key}?tab=repositories']/span")[0].text,
+        )
+        T.extra(
+            "followers", xpath(T, f"//a[@href='/{T.key}?tab=followers']/span")[0].text
+        )
+        T.extra(
+            "following", xpath(T, f"//a[@href='/{T.key}?tab=following']/span")[0].text
+        )
+        T.extra("stars", xpath(T, f"//a[@href='/{T.key}?tab=stars']/span")[0].text)
         T.extra(
             "timeline",
             {
@@ -90,11 +108,48 @@ class Extractor:
                     "name": _("div.d-flex>a").text(),
                     "url": urljoin(str(T.resp.url), link),
                     "description": _("p.pinned-item-desc").text(),
-                    "star": x(f'//a[@href="{link}/stargazers"]')[0].text,
-                    "fork": x(f'//a[@href="{link}/network/members"]')[0].text,
+                    "star": xpath(T, f'//a[@href="{link}/stargazers"]')[0].text,
+                    "fork": xpath(T, f'//a[@href="{link}/network/members"]')[0].text,
                 }
                 for _ in T.html.pq("div.pinned-item-list-item-content").items()
                 if (link := _("div.d-flex>a").attr("href"))
+            ],
+        )
+        yield T
+
+    @staticmethod
+    def twitter() -> Generator:
+        timestamp_map = {"h": "hour", "m": "minute", "s": "second", "d": "day"}
+
+        T = yield from upload(url="https://mobile.twitter.com/{}", proxy=True,)
+
+        _ = T.html.pq("#container")
+
+        T.name = _("div.fullname").text()
+        T.avatar = _("td.avatar>img").attr("src")
+        T.location = _("div.location").text()
+        T.sign = _("div.bio").text()
+        T.website = _("div.url").text()
+        T.extra("tweets", _(".profile-stats td:nth-child(1) .statnum").text())
+        T.extra("following", _(".profile-stats td:nth-child(2) .statnum").text())
+        T.extra("followers", _(".profile-stats td:nth-child(3) .statnum").text())
+        T.extra(
+            "dynamic",
+            [
+                {
+                    "action": item(".tweet-reply-context").text(),
+                    "content": item(".tweet-text").text(),
+                    "url": urljoin(str(T.resp.url), item.attr("href")),
+                    "datetime": (
+                        moment.now().add(
+                            **{timestamp_map[timestamp[-1]]: int(timestamp[:-1])}
+                        )
+                        if timestamp[-1].isalpha()
+                        else moment.date(timestamp)
+                    ).format("YYYY-MM-DD HH:mm:ss"),
+                }
+                for item in _("table.tweet  ").items()
+                if (timestamp := item(".timestamp").text())
             ],
         )
         yield T

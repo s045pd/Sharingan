@@ -3,20 +3,21 @@
     We will try to find your visible basic footprint from social media as much as possible
 """
 import asyncio
-from pathlib import Path
-from base64 import b64encode
-from itertools import product
-from pprint import pprint
-from json import dumps
-import moment
-
+from base64 import b64decode, b64encode
 from dataclasses import dataclass, field
-from typing import List, Dict, Set
+from itertools import product
+from json import dumps
+from pathlib import Path
+from pprint import pprint
+from typing import Dict, List, Set
+
 import click
 import httpx
+import moment
 from progressbar import ProgressBar
 from requests_html import HTML
 
+from common import init_dir
 from extract import Extractor
 from log import error, info, success, warning
 from models import config, error_types, person, web_images
@@ -25,7 +26,8 @@ from models import config, error_types, person, web_images
 @dataclass
 class StareAt:
     name: str
-    proxy: str
+    proxy_uri: str
+    no_proxy: bool = False
     save_path: str = "./events"
     pass_history: bool = False
     singel: str = ""
@@ -33,6 +35,7 @@ class StareAt:
 
     max_keepalive: int = 5
     max_conns: int = 101
+    max_timeout: int = 10
 
     image_available_key = {"avatar", "images"}
     save_block_keys = {"resp", "html", "conf"}
@@ -58,9 +61,14 @@ class StareAt:
         limits = httpx.PoolLimits(
             max_keepalive=self.max_keepalive, max_connections=self.max_conns
         )
-        self.client = httpx.AsyncClient(pool_limits=limits, http2=True)
+        self.client = httpx.AsyncClient(
+            pool_limits=limits, http2=True, timeout=self.max_timeout
+        )
         self.client_out = httpx.AsyncClient(
-            pool_limits=limits, http2=True, proxies={"all": self.proxy},
+            pool_limits=limits,
+            http2=True,
+            proxies={"all": self.proxy_uri},
+            timeout=self.max_timeout,
         )
         # self.bar = ProgressBar(max_value=len(self.sites))
 
@@ -69,7 +77,10 @@ class StareAt:
             singel proccess to get target data
         """
         try:
-            client = self.client_out if data.proxy else self.client
+            if self.no_proxy:
+                client = self.client
+            else:
+                client = self.client_out if data.proxy else self.client
             url = data.url.format(self.name)
             if (method := data.method) == "post":
                 req = client.post(
@@ -180,16 +191,25 @@ class StareAt:
 
         if not save_flag:
             return
-        filename = f'{self.name +  ( str(moment.now().format("YYYY-MM-DD HH:mm:ss"))  if self.pass_history else "" ) }.json'
-        filepath = self.save_path / filename
-        final_data = {
-            key: val.report()
-            for key, val in self.datas.items()
-            if not isinstance(val, dict)
-        }
-        with filepath.open("w") as file:
+        file_name = f'{self.name +  ( str(moment.now().format("YYYY-MM-DD HH:mm:ss"))  if self.pass_history else "" ) }.json'
+
+        target_path = init_dir(self.save_path / self.name)
+        avatar_path = init_dir(target_path / "avatars")
+
+        file_path = target_path / file_name
+        final_data = {}
+        for key, val in self.datas.items():
+            if isinstance(val, dict):
+                continue
+            val_data = val.report()
+            final_data[key] = val_data
+            if not val_data.get("avatar"):
+                continue
+            with (avatar_path / f"{key}.jpeg").open("wb") as img:
+                img.write(b64decode(val.avatar_b64))
+        with file_path.open("w") as file:
             file.write(dumps(final_data, indent=4, ensure_ascii=False))
-            info(f"datas saved to: {filepath}")
+            info(f"datas saved to: {str(file_path.absolute())}")
 
     def run(self) -> None:
         asyncio.run(self.loop())
@@ -197,16 +217,41 @@ class StareAt:
 
 
 @click.command()
-@click.option("--name", default="blue")
-@click.option("--proxy", default="http://127.0.0.1:1087")
-@click.option("--save_path", default="../events")
-@click.option("--pass_history", is_flag=True)
-@click.option("--singel", default="")
-@click.option("--debug", is_flag=True)
+@click.option("--name", default="blue", help="The username you need to search")
+@click.option(
+    "--proxy_uri",
+    default="http://127.0.0.1:1087",
+    help="Proxy address in case of need to use a proxy to be used",
+)
+@click.option(
+    "--no_proxy", is_flag=True, help="All connections will be directly connected"
+)
+@click.option(
+    "--save_path",
+    default="../events",
+    help="The storage location of the collected results",
+)
+@click.option(
+    "--pass_history",
+    is_flag=True,
+    help="The file name will be named according to the scan end time",
+)
+@click.option(
+    "--singel",
+    default="",
+    help="Commonly used for single target information acquisition or testing",
+)
+@click.option("--debug", is_flag=True, help="Debug model")
 def main(
-    name: str, proxy: str, save_path: str, pass_history: bool, singel: str, debug: bool
+    name: str,
+    proxy_uri: str,
+    no_proxy: bool,
+    save_path: str,
+    pass_history: bool,
+    singel: str,
+    debug: bool,
 ) -> None:
-    StareAt(name, proxy, save_path, pass_history, singel, debug).run()
+    StareAt(name, proxy_uri, no_proxy, save_path, pass_history, singel, debug).run()
 
 
 if __name__ == "__main__":
