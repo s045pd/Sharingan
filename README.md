@@ -33,6 +33,8 @@ python3 worker.py --name=blue
 
 ```
 
+![](./medias/use.gif)
+
 # Add New Targets
 
 I have considered using `JSON` as the site's configuration file, but later wrote it in `extract.py`

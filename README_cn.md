@@ -34,6 +34,8 @@ python3 worker.py --name=blue
 
 ```
 
+![](./medias/use.gif)
+
 # 添加新站点
 
 我有曾考虑过使用 `json` 作为站点的配置文件，但后来还是把它写在了 `extract.py`中
