@@ -121,7 +121,7 @@ Options:
   --debug            Debug model
   --update           Do not overwrite the original data results
   --workers INTEGER  Number of concurrent workers
-  --help             Show this message and exit.
+  --help             Show this message and exit. 
 
 ```
 

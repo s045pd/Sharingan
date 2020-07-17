@@ -108,7 +108,7 @@ Options:
   --debug            开发者模式
   --update           将以更新的方式写入原有文件
   --workers INTEGER  异步worker数量
-  --help             打印帮助文档
+  --help             打印帮助文档 
 
 ```
 
