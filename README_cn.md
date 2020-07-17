@@ -45,18 +45,18 @@ python3 worker.py blue
     @staticmethod
     def __example() -> Generator:
         """
-            fs0c131y
             1. <-- yield your config first
             2. --> then got your datas back 
             3. <-- finally, yield the extracted data back
         """
         T = yield from upload(
-            {
+            **{
                 "url": "http://xxxx", 
             }
         )
 
         T.name = T.html.pq('title').text()
+        ...
 
         yield T
 
