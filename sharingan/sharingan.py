@@ -17,10 +17,10 @@ import moment
 import pypeln as pl
 from requests_html import HTML
 
-from common import init_dir, status_print
-from extract import Extractor
-from log import error, info, success, warning
-from models import config, error_types, person, web_images
+from sharingan.common import init_dir, status_print
+from sharingan.extract import Extractor
+from sharingan.log import error, info, success, warning
+from sharingan.models import config, error_types, person, web_images
 
 
 @dataclass

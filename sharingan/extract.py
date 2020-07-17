@@ -11,10 +11,7 @@ from urllib.parse import urljoin
 import moment
 from box import Box
 
-from models import config, person
-
-# from common import str_to_num
-
+from sharingan.models import config, person
 
 def upload(*args, **kwargs):
     return person(*(yield config(*args, **kwargs)))

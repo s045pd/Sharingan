@@ -10,7 +10,7 @@ import httpx
 from retry import retry
 from termcolor import colored
 
-from log import info
+from sharingan.log import info
 
 
 def init_dir(path: pathlib.Path) -> pathlib.Path:

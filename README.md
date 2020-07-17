@@ -20,16 +20,14 @@ git clone https://github.com/aoii103/Sharingan.git
 
 cd sharingan
 
-python3 -m pip install -r requirements.txt
+python3 setup.py install
 ```
 
 
 # Usage
 
 ```sh
-cd sharingan
-
-python3 worker.py --name=blue
+python3 -m sharingan --name=blue
 
 ```
 
@@ -74,7 +72,7 @@ And we can use the following code . for example, when the target is `twitter`
 
 ```bash
 
-python3 worker.py --singel=twitter --name=larry  
+python3 -m sharingan --singel=twitter --name=larry  
 ```
 
 # Create sites from sherlock
@@ -82,7 +80,7 @@ python3 worker.py --singel=twitter --name=larry
 run the following command first 
 
 ```bash
-python3 common.py
+python3 -m sharingan.common
 ```
 
 and it will create a python file named `templates.py`
@@ -106,6 +104,26 @@ and it will create a python file named `templates.py`
 ```
 
 then replace them into `extract.py`
+
+# Options
+
+```bash
+
+Usage: __main__.py [OPTIONS]
+
+Options:
+  --name TEXT        The username you need to search
+  --proxy_uri TEXT   Proxy address in case of need to use a proxy to be used
+  --no_proxy         All connections will be directly connected
+  --save_path TEXT   The storage location of the collected results
+  --pass_history     The file name will be named according to the scan endtime
+  --singel TEXT      Commonly used for single target information acquisition or testing
+  --debug            Debug model
+  --update           Do not overwrite the original data results
+  --workers INTEGER  Number of concurrent workers
+  --help             Show this message and exit.
+
+```
 
 
 # TODO

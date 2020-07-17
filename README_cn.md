@@ -20,7 +20,7 @@ git clone https://github.com/aoii103/Sharingan.git
 
 cd sharingan
 
-python3 -m pip install -r requirements.txt
+python3 setup.py install 
 ```
 
 
@@ -30,7 +30,7 @@ python3 -m pip install -r requirements.txt
 
 cd sharingan
 
-python3 worker.py --name=blue
+python3 -m sharingan --name=blue
 
 ```
 
@@ -75,7 +75,7 @@ python3 worker.py --name=blue
 
 ```bash
 
-python3 worker.py --singel=twitter --name=larry  
+python3 -m sharingan --singel=twitter --name=larry  
 
 ```
 
@@ -84,8 +84,7 @@ python3 worker.py --singel=twitter --name=larry
 首先我们运行如下代码
 
 ```bash
-
-python3 common.py
+python3 -m sharingan.common
 ```
 
 然后它将创建一个叫`templates.py`的python脚本
@@ -93,6 +92,25 @@ python3 common.py
 我们将其中的代码替换到 `extract.py`的相应位置即可
 
 
+# 选项
+
+```bash
+
+Usage: __main__.py [OPTIONS]
+
+Options:
+  --name TEXT        您所需要搜索的用户名
+  --proxy_uri TEXT   在需要翻墙是所使用的代理地址
+  --no_proxy         所有的请求将进行直连
+  --save_path TEXT   结果保留路径
+  --pass_history     跳过历史保存结果，文件保存将标记时间戳
+  --singel TEXT      在对单个目标进行爬行的时候使用
+  --debug            开发者模式
+  --update           将以更新的方式写入原有文件
+  --workers INTEGER  异步worker数量
+  --help             打印帮助文档
+
+```
 
 
 # TODO
