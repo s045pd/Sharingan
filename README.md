@@ -1,5 +1,5 @@
 <p align="center">
-<img src="medias/main.jpeg" width=177 height=100 />
+<img src="medias/main.gif"/>
     <h1 align="center" >Sharingan</h1>
     <p align="center"> We will try to find your visible basic footprint from social media as much as possible</p>
         <p align="center">
