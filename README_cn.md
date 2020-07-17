@@ -30,7 +30,7 @@ python3 -m pip install -r requirements.txt
 
 cd sharingan
 
-python3 worker.py blue
+python3 worker.py --name=blue
 
 ```
 
