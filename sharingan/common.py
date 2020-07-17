@@ -14,6 +14,9 @@ from sharingan.log import info
 
 
 def init_dir(path: pathlib.Path) -> pathlib.Path:
+    """
+        specified a directory and init it
+    """
     path.mkdir(exist_ok=True)
     return path
 
@@ -25,6 +28,9 @@ def str_to_num(strs: str) -> int or str:
 
 
 def status_print(resp, txt) -> str:
+    """
+        print crawled results with different status color
+    """
     maps = {
         "1": lambda txt: colored(txt, "blue"),
         "2": lambda txt: colored(txt, "green"),

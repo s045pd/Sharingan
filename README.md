@@ -15,14 +15,18 @@
 
 First, ensure that you have installed the ```python3.8+``` , and then run the following commands.
 
-```sh
+```bash
 git clone https://github.com/aoii103/Sharingan.git
 
 cd sharingan
 
 python3 setup.py install
 ```
+or via pip
 
+```bash
+pip install sharingan
+```
 
 # Usage
 
@@ -107,7 +111,7 @@ then replace them into `extract.py`
 
 # Options
 
-```bash
+```
 
 Usage: __main__.py [OPTIONS]
 
