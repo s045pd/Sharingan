@@ -22,7 +22,7 @@ cd sharingan
 
 python3 setup.py install 
 ```
-
+ 
 或通过pip安装
 
 ```bash
