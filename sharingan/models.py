@@ -57,8 +57,9 @@ class person:
     debug: bool = False
     available: bool = True
     _name: str = ""
+    _title: str = ""
     _age: int = 0
-    _gender: int = 1
+    _gender: int = 0
     _sign: str = ""
     _avatar: str = ""
     _avatar_b64: str = ""
@@ -66,10 +67,16 @@ class person:
     _websites: Set[str] = field(default_factory=set)
     _extras: Dict = field(default_factory=dict)
 
-    def report(self):
+    def report(self) -> dict:
+        """
+            format results data ,filter all the empty ket:val 
+        """
         results = {
+            "title": self._title,
             "name": self._name,
             "sign": self._sign,
+            "age": self._age,
+            "gender": self._gender,
             "avatar": self._avatar_b64,
             "locations": list(self._locations),
             "websites": list(self._websites),
@@ -77,6 +84,9 @@ class person:
         }
         if self.debug:
             results.update({"html": self.html.text, "headers": dict(self.resp.headers)})
+        results = dict(filter(lambda _: _[-1], results.items()))
+        if results:
+            results["url"] = str(self.resp.url)
         return results
 
     @property
@@ -86,6 +96,14 @@ class person:
     @name.setter
     def name(self, v: str) -> None:
         self._name = v
+
+    @property
+    def title(self) -> str:
+        return self._title
+
+    @title.setter
+    def title(self, v: str) -> None:
+        self._title = v
 
     @property
     def sign(self) -> str:

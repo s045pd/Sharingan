@@ -3,10 +3,14 @@
     We will try to find your visible basic footprint from social media as much as possible
 """
 import pathlib
-import httpx
 import re
 import string
+
+import httpx
 from retry import retry
+from termcolor import colored
+
+from log import info
 
 
 def init_dir(path: pathlib.Path) -> pathlib.Path:
@@ -18,6 +22,17 @@ def str_to_num(strs: str) -> int or str:
     strs = strs.replace(",", "")
     strs = "0" if not strs else strs
     return int(strs) if strs.isalpha() else strs
+
+
+def status_print(resp, txt) -> str:
+    maps = {
+        "1": lambda txt: colored(txt, "blue"),
+        "2": lambda txt: colored(txt, "green"),
+        "3": lambda txt: colored(txt, "yellow"),
+        "4": lambda txt: colored(txt, "red"),
+        "5": lambda txt: colored(txt, "red"),
+    }
+    print(maps[str(resp.status_code)[0]](txt))
 
 
 @retry(tries=3)
@@ -37,6 +52,8 @@ def extract_maker_with_sherlock():
     @staticmethod
     def {}():
         T = yield from upload({})
+
+        T.title = T.html.pq('title').text()
         yield T
         """
         for key, val in datas.items():
@@ -48,14 +65,12 @@ def extract_maker_with_sherlock():
             all_types.add(types)
             if not types:
                 continue
-            if types == "status_code":
+            if types in {"status_code", "response_url"}:
                 pass
             elif types == "message":
                 conf += f"error_type='text',error_msg='''{msg}''',"
-            elif types == "response_url":
-                conf += f"error_type='func',error_msg = lambda resp: resp.url == '''{val['urlMain']}'''"
             file.write(model_str.format(key, conf).replace(URLCODE, "{}"))
-    print(f"{all_types=}")
+    info(f"{all_types=}")
 
 
 if __name__ == "__main__":

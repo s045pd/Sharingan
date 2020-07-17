@@ -6,8 +6,9 @@ import logging
 
 from termcolor import colored
 
-logging.basicConfig(format="[%(asctime)s]%(message)s", level=logging.INFO)
-loger = logging.getLogger("evilEye")
+# logging.basicConfig(format="[%(asctime)s]%(message)s", level=logging.INFO)
+logging.basicConfig(format="%(message)s", level=logging.INFO)
+loger = logging.getLogger("Sharingan")
 
 
 def info(txt: str) -> None:
@@ -23,4 +24,8 @@ def warning(txt: str) -> None:
 
 
 def error(txt: str) -> None:
+    loger.error(colored(txt, "red"))
+
+
+def critical(txt: str) -> None:
     loger.error(colored(txt, "red"))

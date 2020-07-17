@@ -14,10 +14,10 @@ from typing import Dict, List, Set
 import click
 import httpx
 import moment
-from progressbar import ProgressBar
+import pypeln as pl
 from requests_html import HTML
 
-from common import init_dir
+from common import init_dir, status_print
 from extract import Extractor
 from log import error, info, success, warning
 from models import config, error_types, person, web_images
@@ -34,8 +34,8 @@ class StareAt:
     debug: bool = False
     update: bool = False
 
-    max_keepalive: int = 5
-    max_conns: int = 101
+    workers: int = 20
+    max_size: int = 20
     max_timeout: int = 10
 
     image_available_key = {"avatar", "images"}
@@ -59,53 +59,61 @@ class StareAt:
 
         self.save_path = Path(self.save_path)
         self.save_path.mkdir(exist_ok=True)
-        limits = httpx.PoolLimits(
-            max_keepalive=self.max_keepalive, max_connections=self.max_conns
-        )
-        self.client = httpx.AsyncClient(
-            pool_limits=limits, http2=True, timeout=self.max_timeout
-        )
-        self.client_out = httpx.AsyncClient(
-            pool_limits=limits,
+
+    def create_client(self, data: person) -> httpx.AsyncClient:
+        client = httpx.AsyncClient(http2=True, verify=False, timeout=self.max_timeout)
+        client_out = httpx.AsyncClient(
             http2=True,
+            verify=False,
             proxies={"all": self.proxy_uri},
             timeout=self.max_timeout,
         )
-        # self.bar = ProgressBar(max_value=len(self.sites))
+        if self.no_proxy:
+            return client
+        elif data.proxy:
+            return client_out
+        else:
+            return client
 
-    async def single(self, key: str, indexs: int, target: object, data: config) -> None:
+    async def single(self, datas: tuple) -> None:
         """
             singel proccess to get target data
         """
+        key, indexs, target, data = datas
         try:
-            if self.no_proxy:
-                client = self.client
-            else:
-                client = self.client_out if data.proxy else self.client
-            url = data.url.format(self.name)
-            if (method := data.method) == "post":
-                req = client.post(
-                    url,
-                    data=data.data,
-                    json=data.json,
-                    headers=data.headers,
-                    cookies=data.cookies,
+            async with self.create_client(data) as client:
+                url = data.url.format(self.name)
+                if (method := data.method) == "post":
+                    req = client.post(
+                        url,
+                        data=data.data,
+                        json=data.json,
+                        headers=data.headers,
+                        cookies=data.cookies,
+                        allow_redirects=False,
+                    )
+                else:
+                    req = client.get(
+                        url,
+                        headers=data.headers,
+                        cookies=data.cookies,
+                        allow_redirects=False,
+                    )
+                resp = await req
+                self.assert_proccess(resp, data)
+                pure_info = target.send(
+                    (self.name, key, resp, HTML(html=resp.text), data, self.debug)
                 )
-            else:
-                req = client.get(url, headers=data.headers, cookies=data.cookies)
-            resp = await req
-            self.assert_proccess(resp, data)
-            pure_info = target.send(
-                (self.name, key, resp, HTML(html=resp.text), data, self.debug)
-            )
-            await self.loop_images(client, pure_info)
-            self.datas[key] = pure_info
+                await self.loop_images(client, pure_info)
+                self.datas[key] = pure_info
+                status_print(
+                    resp,
+                    f"[+]{key.ljust(10)} ({resp.status_code}){resp.url}:  {pure_info._title}",
+                )
         except AssertionError:
             pass
         except Exception as e:
             self.datas[key] = {"error": f"{e.__class__.__name__}: {e}"}
-        # finally:
-        # self.bar.update(indexs + 1)
 
     def assert_proccess(self, resp: httpx.Response, data: person) -> None:
         """
@@ -175,8 +183,10 @@ class StareAt:
             if "__next__" not in dir(target):
                 continue
             data = next(target)
-            tasks.append(self.single(key, indexs, target, data))
-        await asyncio.gather(*tasks)
+            tasks.append((key, indexs, target, data))
+        await pl.task.map(
+            self.single, tasks, workers=self.workers, maxsize=self.max_size
+        )
 
     def save(self) -> None:
         """
@@ -184,10 +194,7 @@ class StareAt:
         """
         save_flag = False
         for key, val in self.datas.items():
-            if isinstance(val, dict):
-                error(f'{key}: {val["error"]}')
-            elif isinstance(val, object):
-                success(f"{key}[{val.resp.url}]: {val._name}")
+            if isinstance(val, object):
                 save_flag = True
 
         if not save_flag:
@@ -217,7 +224,7 @@ class StareAt:
 
         with file_path.open("w") as file:
             file.write(dumps(final_data, indent=4, ensure_ascii=False))
-            info(f"datas saved to: {str(file_path.absolute())}")
+            info(f"[=]Saved: {str(file_path.absolute())}")
 
     def run(self) -> None:
         asyncio.run(self.loop())
@@ -253,6 +260,7 @@ class StareAt:
 @click.option(
     "--update", is_flag=True, help="Do not overwrite the original data results"
 )
+@click.option("--workers", type=int, default=20, help="Number of concurrent workers")
 def main(
     name: str,
     proxy_uri: str,
@@ -262,9 +270,18 @@ def main(
     singel: str,
     debug: bool,
     update: bool,
+    workers: int,
 ) -> None:
     StareAt(
-        name, proxy_uri, no_proxy, save_path, pass_history, singel, debug, update
+        name,
+        proxy_uri,
+        no_proxy,
+        save_path,
+        pass_history,
+        singel,
+        debug,
+        update,
+        workers,
     ).run()
 
 
