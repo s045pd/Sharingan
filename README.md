@@ -18,7 +18,7 @@ First, ensure that you have installed the ```python3.8+``` , and then run the fo
 ```sh
 git clone https://github.com/aoii103/Sharingan.git
 
-cd Sharingan
+cd sharingan
 
 python3 -m pip install -r requirements.txt
 ```
@@ -27,6 +27,8 @@ python3 -m pip install -r requirements.txt
 # Usage
 
 ```sh
+cd sharingan
+
 python3 worker.py blue
 
 ```
@@ -72,6 +74,36 @@ And we can use the following code . for example, when the target is `twitter`
 
 python3 worker.py --singel=twitter --name=larry  
 ```
+
+# Create sites from sherlock
+
+run the following command first 
+
+```bash
+python3 common.py
+```
+
+and it will create a python file named `templates.py`
+
+```python
+    @staticmethod
+    def site_2Dimensions():
+        T = yield from upload(url='''https://2Dimensions.com/a/{}''',)
+
+        T.title = T.html.pq('title').text()
+        yield T
+        
+    @staticmethod
+    def site_3dnews():
+        T = yield from upload(url='''http://forum.3dnews.ru/member.php?username={}''',error_type='text',error_msg='''Пользователь не зарегистрирован и не имеет профиля для просмотра.''',)
+
+        T.title = T.html.pq('title').text()
+        yield T
+
+    ...
+```
+
+then replace them into `extract.py`
 
 
 # TODO

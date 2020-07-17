@@ -18,7 +18,7 @@
 ```sh
 git clone https://github.com/aoii103/Sharingan.git
 
-cd Sharingan
+cd sharingan
 
 python3 -m pip install -r requirements.txt
 ```
@@ -27,6 +27,9 @@ python3 -m pip install -r requirements.txt
 # 案例用法
 
 ```sh
+
+cd sharingan
+
 python3 worker.py blue
 
 ```
@@ -73,6 +76,20 @@ python3 worker.py blue
 python3 worker.py --singel=twitter --name=larry  
 
 ```
+
+# 通过 sherlock 创建站点
+
+首先我们运行如下代码
+
+```bash
+
+python3 common.py
+```
+
+然后它将创建一个叫`templates.py`的python脚本
+
+我们将其中的代码替换到 `extract.py`的相应位置即可
+
 
 
 
