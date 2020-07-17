@@ -33,5 +33,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test
       run: |
-        cd sharingan
-        python __main__.py --name=ruanyf --no_proxy
+        python setup.py install
+        python -m sharingan --name=ruanyf --no_proxy
