@@ -243,7 +243,7 @@ class StareAt:
 )
 @click.option(
     "--save_path",
-    default="../events",
+    default="./events",
     help="The storage location of the collected results",
 )
 @click.option(
