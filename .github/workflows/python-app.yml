@@ -33,10 +33,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test
       run: |
-        python -m sharingan --name=ruanyf --no_proxy
+        python -m sharingan --name=ruanyf --no_proxy > log
     - name: send result message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "hi"
+        message: < log
