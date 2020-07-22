@@ -34,3 +34,9 @@ jobs:
     - name: Test
       run: |
         python -m sharingan --name=ruanyf --no_proxy
+    - name: send result message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message_file: events/ruanyf/ruanyf.json
