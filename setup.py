@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sharingan",
-    version="0.0.3",
+    version="0.0.4",
     author="s045pd",
     author_email="s045pd.x@gmail.com",
     description="We will try to find your visible basic footprint from social media as much as possible",
