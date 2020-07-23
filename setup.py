@@ -29,7 +29,7 @@ setuptools.setup(
         "httpx==0.13.3",
         "progressbar33==2.4",
         "moment==0.8.2",
-        "retry==0.9.2",        
+        "retry==0.9.2",
         "pypeln==0.4.4",
     ],
 )

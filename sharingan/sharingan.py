@@ -22,7 +22,8 @@ from sharingan.extract import Extractor
 from sharingan.log import error, info, success, warning
 from sharingan.models import config, error_types, person, web_images
 
-success("""
+success(
+    """
 ███████╗██╗  ██╗ █████╗ ██████╗ ██╗███╗   ██╗ ██████╗  █████╗ ███╗   ██╗
 ██╔════╝██║  ██║██╔══██╗██╔══██╗██║████╗  ██║██╔════╝ ██╔══██╗████╗  ██║
 ███████╗███████║███████║██████╔╝██║██╔██╗ ██║██║  ███╗███████║██╔██╗ ██║
@@ -33,6 +34,7 @@ success("""
 [+]REPO_URL: https://github.com/aoii103/Sharingan
 [+]AUTHOR:   s045pd
 """)
+
 
 @dataclass
 class StareAt:
@@ -243,7 +245,7 @@ class StareAt:
 
 
 @click.command()
-@click.option("--name", default="blue", help="The username you need to search")
+@click.argument("name")
 @click.option(
     "--proxy_uri",
     default="http://127.0.0.1:1087",

@@ -13,6 +13,7 @@ from box import Box
 
 from sharingan.models import config, person
 
+
 def upload(*args, **kwargs):
     return person(*(yield config(*args, **kwargs)))
 
