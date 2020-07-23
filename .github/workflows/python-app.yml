@@ -33,7 +33,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test
       run: |
-        python -m sharingan --name=ruanyf --no_proxy > log
+        python -m sharingan ruanyf --no_proxy
     - name: send result message
       uses: appleboy/telegram-action@master
       with:

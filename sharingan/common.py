@@ -53,7 +53,8 @@ def extract_maker_with_sherlock():
         "https://raw.githubusercontent.com/sherlock-project/sherlock/master/sherlock/resources/data.json",
         verify=False,
     ).json()
-    with pathlib.Path("templates.py").open("w") as file:
+    script = pathlib.Path("templates.py")
+    with script.open("w") as file:
         model_str = """
     @staticmethod
     def {}():
@@ -77,6 +78,7 @@ def extract_maker_with_sherlock():
                 conf += f"error_type='text',error_msg='''{msg}''',"
             file.write(model_str.format(key, conf).replace(URLCODE, "{}"))
     info(f"{all_types=}")
+    info(f"file saved: {str(script.absolute())}")
 
 
 if __name__ == "__main__":

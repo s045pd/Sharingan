@@ -31,7 +31,7 @@ pip install sharingan
 # Usage
 
 ```sh
-python3 -m sharingan --name=blue
+python3 -m sharingan blue
 
 ```
 
@@ -76,7 +76,7 @@ And we can use the following code . for example, when the target is `twitter`
 
 ```bash
 
-python3 -m sharingan --singel=twitter --name=larry  
+python3 -m sharingan larry --singel=twitter
 ```
 
 # Create sites from sherlock
@@ -113,7 +113,7 @@ then replace them into `extract.py`
 
 ```
 
-Usage: __main__.py [OPTIONS]
+Usage: __main__.py [OPTIONS] NAME
 
 Options:
   --name TEXT        The username you need to search

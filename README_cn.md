@@ -1,5 +1,5 @@
 <p align="center">
-<img src="medias/main.jpeg" width=177 height=100 />
+<img src="medias/main.gif"/>
     <h1 align="center" >Sharingan</h1>
     <p align="center">我们将尽可能得从社交媒体中寻找您的基本可见足迹</p>
         <p align="center">
@@ -37,7 +37,7 @@ pip install sharingan
 
 cd sharingan
 
-python3 -m sharingan --name=blue
+python3 -m sharingan blue
 
 ```
 
@@ -82,7 +82,7 @@ python3 -m sharingan --name=blue
 
 ```bash
 
-python3 -m sharingan --singel=twitter --name=larry  
+python3 -m sharingan larry --singel=twitter
 
 ```
 
@@ -103,7 +103,7 @@ python3 -m sharingan.common
 
 ```bash
 
-Usage: __main__.py [OPTIONS]
+Usage: __main__.py [OPTIONS] NAME
 
 Options:
   --name TEXT        您所需要搜索的用户名
