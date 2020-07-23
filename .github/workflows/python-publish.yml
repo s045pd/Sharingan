@@ -30,3 +30,9 @@ jobs:
         ls -lah
         python setup.py sdist bdist_wheel
         twine upload --skip-existing  dist/*
+    - name: send result message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: sharingan latest version upload successful
