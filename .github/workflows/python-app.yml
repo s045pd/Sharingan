@@ -40,4 +40,4 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: sharingan report
-        message_file: ./events/ruanyf/ruanyf.json 
+        # message_file: ./events/ruanyf/ruanyf.json 
