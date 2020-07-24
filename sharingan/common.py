@@ -38,7 +38,7 @@ def status_print(resp, txt) -> str:
         "4": lambda txt: colored(txt, "red"),
         "5": lambda txt: colored(txt, "red"),
     }
-    print(maps[str(resp.status_code)[0]](txt))
+    print(maps.get(str(resp.status_code)[0], maps[list(maps.keys())[-1]])(txt))
 
 
 @retry(tries=3)

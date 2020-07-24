@@ -33,7 +33,8 @@ success(
 
 [+]REPO_URL: https://github.com/aoii103/Sharingan
 [+]AUTHOR:   s045pd
-""")
+"""
+)
 
 
 @dataclass
