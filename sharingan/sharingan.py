@@ -10,6 +10,7 @@ from json import dumps, loads
 from pathlib import Path
 from pprint import pprint
 from typing import Dict, List, Set
+import uvloop
 
 import click
 import httpx
@@ -300,4 +301,5 @@ def main(
 
 
 if __name__ == "__main__":
+    # uvloop.install()
     main()

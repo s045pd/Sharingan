@@ -1,7 +1,8 @@
 import unittest
 
-from sharingan import common, log
 from box import Box
+
+from sharingan import common, log
 
 
 class test_normal(unittest.TestCase):

@@ -2,8 +2,6 @@
     Sharingan project
     We will try to find your visible basic footprint from social media as much as possible
 """
-import asyncio
-from base64 import b64encode
 from json import loads
 from typing import Generator
 from urllib.parse import urljoin
@@ -154,6 +152,13 @@ class Extractor:
                 if (timestamp := item(".timestamp").text())
             ],
         )
+        yield T
+
+
+    @staticmethod
+    def hackone() -> Generator:
+        T = yield from upload(url="https://hackerone.com/{}?type=user", proxy=True)
+        T.title = T.html.pq("title").text()
         yield T
 
     # @staticmethod
