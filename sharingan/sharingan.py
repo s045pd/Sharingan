@@ -23,6 +23,8 @@ from sharingan.extract import Extractor
 from sharingan.log import error, info, success, warning
 from sharingan.models import config, error_types, person, web_images
 
+asyncio.log.logger.setLevel(40)
+
 success(
     """
 ███████╗██╗  ██╗ █████╗ ██████╗ ██╗███╗   ██╗ ██████╗  █████╗ ███╗   ██╗
@@ -32,7 +34,7 @@ success(
 ███████║██║  ██║██║  ██║██║  ██║██║██║ ╚████║╚██████╔╝██║  ██║██║ ╚████║
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝
 
-[+]REPO_URL: https://github.com/aoii103/Sharingan
+[+]REPO_URL: https://github.com/s045pd/Sharingan
 [+]AUTHOR:   s045pd
 """
 )
