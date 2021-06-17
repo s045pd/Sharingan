@@ -26,13 +26,13 @@ class error_types:
 @dataclass
 class config:
     """
-        method_1
-        error_type = "xxxx"
-        error_msg = "xxxx"
+    method_1
+    error_type = "xxxx"
+    error_msg = "xxxx"
 
-        method_2
-        error_type = ["xxxxA","xxxxB"]
-        error_msg = ["xxxxa","xxxxb"]
+    method_2
+    error_type = ["xxxxA","xxxxB"]
+    error_msg = ["xxxxa","xxxxb"]
     """
 
     url: str
@@ -69,7 +69,7 @@ class person:
 
     def report(self) -> dict:
         """
-            format results data ,filter all the empty ket:val 
+        format results data ,filter all the empty ket:val
         """
         results = {
             "title": self._title,

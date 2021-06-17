@@ -8,12 +8,11 @@
     <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 </p>
 
-
-> 中文版: [Readme_cn](README_cn.md) 
+> 中文版: [Readme_cn](README_cn.md)
 
 # Environmental
 
-First, ensure that you have installed the ```python3.8+``` , and then run the following commands.
+First, ensure that you have installed the `python3.8+` , and then run the following commands.
 
 ```bash
 git clone https://github.com/aoii103/Sharingan.git
@@ -22,6 +21,7 @@ cd sharingan
 
 python3 setup.py install
 ```
+
 or via pip
 
 ```bash
@@ -45,19 +45,18 @@ And what we need to do is add the following method under class `Extractor`, wher
 
 For optional configurations, see [`models.py`](https://github.com/aoii103/Sharingan/blob/master/sharingan/models.py#L25)
 
-
 ```python
 
     @staticmethod
     def __example() -> Generator:
         """
             1. <-- yield your config first
-            2. --> then got your datas back 
+            2. --> then got your datas back
             3. <-- finally, yield the extracted data back
         """
         T = yield from upload(
             **{
-                "url": "http://xxxx", 
+                "url": "http://xxxx",
             }
         )
 
@@ -81,7 +80,7 @@ python3 -m sharingan larry --singel=twitter
 
 # Create sites from sherlock
 
-run the following command first 
+run the following command first
 
 ```bash
 python3 -m sharingan.common
@@ -96,7 +95,7 @@ and it will create a python file named `templates.py`
 
         T.title = T.html.pq('title').text()
         yield T
-        
+
     @staticmethod
     def site_3dnews():
         T = yield from upload(url='''http://forum.3dnews.ru/member.php?username={}''',error_type='text',error_msg='''Пользователь не зарегистрирован и не имеет профиля для просмотра.''',)
@@ -125,19 +124,18 @@ Options:
   --debug            Debug model
   --update           Do not overwrite the original data results
   --workers INTEGER  Number of concurrent workers
-  --help             Show this message and exit. 
+  --help             Show this message and exit.
 
 ```
 
-
 # TODO
 
--  Formatted output
+- Formatted output
 
 # 📝 License
 
 This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
 
-***
+---
 
 If you think this script is useful to you, don't forget star 🐶. Inspired by ❤️ [sherlock](https://github.com/sherlock-project/sherlock)

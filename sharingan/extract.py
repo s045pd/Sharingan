@@ -29,10 +29,10 @@ class Extractor:
     @staticmethod
     def __example() -> Generator:
         """
-            fs0c131y
-            1. <-- yield your config first
-            2. --> then got your datas back 
-            3. <-- finally, yield the extracted data back
+        fs0c131y
+        1. <-- yield your config first
+        2. --> then got your datas back
+        3. <-- finally, yield the extracted data back
         """
         T = yield from upload(
             {"url": "http://xxxx", "proxy": True or False, "skip": {}}
@@ -69,7 +69,9 @@ class Extractor:
     @staticmethod
     def github() -> Generator:
         T = yield from upload(
-            url="https://github.com/{}", error_type="text", error_msg="Not Found",
+            url="https://github.com/{}",
+            error_type="text",
+            error_msg="Not Found",
         )
         card = T.html.pq(".h-card")
 
@@ -120,7 +122,10 @@ class Extractor:
     def twitter() -> Generator:
         timestamp_map = {"h": "hour", "m": "minute", "s": "second", "d": "day"}
 
-        T = yield from upload(url="https://mobile.twitter.com/{}", proxy=True,)
+        T = yield from upload(
+            url="https://mobile.twitter.com/{}",
+            proxy=True,
+        )
 
         _ = T.html.pq("#container")
 
@@ -153,7 +158,6 @@ class Extractor:
             ],
         )
         yield T
-
 
     @staticmethod
     def hackone() -> Generator:
@@ -194,7 +198,9 @@ class Extractor:
 
     @staticmethod
     def site_2Dimensions():
-        T = yield from upload(url="""https://2Dimensions.com/a/{}""",)
+        T = yield from upload(
+            url="""https://2Dimensions.com/a/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -234,28 +240,36 @@ class Extractor:
 
     @staticmethod
     def site_7Cups():
-        T = yield from upload(url="""https://www.7cups.com/@{}""",)
+        T = yield from upload(
+            url="""https://www.7cups.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def About_me():
-        T = yield from upload(url="""https://about.me/{}""",)
+        T = yield from upload(
+            url="""https://about.me/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Academia_edu():
-        T = yield from upload(url="""https://independent.academia.edu/{}""",)
+        T = yield from upload(
+            url="""https://independent.academia.edu/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Alik_cz():
-        T = yield from upload(url="""https://www.alik.cz/u/{}""",)
+        T = yield from upload(
+            url="""https://www.alik.cz/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -273,14 +287,18 @@ class Extractor:
 
     @staticmethod
     def Anobii():
-        T = yield from upload(url="""https://www.anobii.com/{}/profile""",)
+        T = yield from upload(
+            url="""https://www.anobii.com/{}/profile""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Aptoide():
-        T = yield from upload(url="""https://{}.en.aptoide.com/""",)
+        T = yield from upload(
+            url="""https://{}.en.aptoide.com/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -298,14 +316,18 @@ class Extractor:
 
     @staticmethod
     def Asciinema():
-        T = yield from upload(url="""https://asciinema.org/~{}""",)
+        T = yield from upload(
+            url="""https://asciinema.org/~{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Ask_Fedora():
-        T = yield from upload(url="""https://ask.fedoraproject.org/u/{}""",)
+        T = yield from upload(
+            url="""https://ask.fedoraproject.org/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -323,63 +345,81 @@ class Extractor:
 
     @staticmethod
     def Audiojungle():
-        T = yield from upload(url="""https://audiojungle.net/user/{}""",)
+        T = yield from upload(
+            url="""https://audiojungle.net/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Avizo():
-        T = yield from upload(url="""https://www.avizo.cz/{}/""",)
+        T = yield from upload(
+            url="""https://www.avizo.cz/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BLIP_fm():
-        T = yield from upload(url="""https://blip.fm/{}""",)
+        T = yield from upload(
+            url="""https://blip.fm/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BOOTH():
-        T = yield from upload(url="""https://{}.booth.pm/""",)
+        T = yield from upload(
+            url="""https://{}.booth.pm/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Badoo():
-        T = yield from upload(url="""https://badoo.com/profile/{}""",)
+        T = yield from upload(
+            url="""https://badoo.com/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Bandcamp():
-        T = yield from upload(url="""https://www.bandcamp.com/{}""",)
+        T = yield from upload(
+            url="""https://www.bandcamp.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Bazar_cz():
-        T = yield from upload(url="""https://www.bazar.cz/{}/""",)
+        T = yield from upload(
+            url="""https://www.bazar.cz/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Behance():
-        T = yield from upload(url="""https://www.behance.net/{}""",)
+        T = yield from upload(
+            url="""https://www.behance.net/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BitBucket():
-        T = yield from upload(url="""https://bitbucket.org/{}/""",)
+        T = yield from upload(
+            url="""https://bitbucket.org/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -397,49 +437,63 @@ class Extractor:
 
     @staticmethod
     def Blogger():
-        T = yield from upload(url="""https://{}.blogspot.com""",)
+        T = yield from upload(
+            url="""https://{}.blogspot.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BodyBuilding():
-        T = yield from upload(url="""https://bodyspace.bodybuilding.com/{}""",)
+        T = yield from upload(
+            url="""https://bodyspace.bodybuilding.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Bookcrossing():
-        T = yield from upload(url="""https://www.bookcrossing.com/mybookshelf/{}/""",)
+        T = yield from upload(
+            url="""https://www.bookcrossing.com/mybookshelf/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BuyMeACoffee():
-        T = yield from upload(url="""https://buymeacoff.ee/{}""",)
+        T = yield from upload(
+            url="""https://buymeacoff.ee/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def BuzzFeed():
-        T = yield from upload(url="""https://buzzfeed.com/{}""",)
+        T = yield from upload(
+            url="""https://buzzfeed.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def CNET():
-        T = yield from upload(url="""https://www.cnet.com/profiles/{}/""",)
+        T = yield from upload(
+            url="""https://www.cnet.com/profiles/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Carbonmade():
-        T = yield from upload(url="""https://{}.carbonmade.com""",)
+        T = yield from upload(
+            url="""https://{}.carbonmade.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -457,7 +511,9 @@ class Extractor:
 
     @staticmethod
     def CashMe():
-        T = yield from upload(url="""https://cash.me/${}""",)
+        T = yield from upload(
+            url="""https://cash.me/${}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -475,7 +531,9 @@ class Extractor:
 
     @staticmethod
     def Championat():
-        T = yield from upload(url="""https://www.championat.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.championat.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -504,42 +562,54 @@ class Extractor:
 
     @staticmethod
     def Cloob():
-        T = yield from upload(url="""https://www.cloob.com/name/{}""",)
+        T = yield from upload(
+            url="""https://www.cloob.com/name/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def CloudflareCommunity():
-        T = yield from upload(url="""https://community.cloudflare.com/u/{}""",)
+        T = yield from upload(
+            url="""https://community.cloudflare.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Clozemaster():
-        T = yield from upload(url="""https://www.clozemaster.com/players/{}""",)
+        T = yield from upload(
+            url="""https://www.clozemaster.com/players/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Codecademy():
-        T = yield from upload(url="""https://www.codecademy.com/profiles/{}""",)
+        T = yield from upload(
+            url="""https://www.codecademy.com/profiles/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Codechef():
-        T = yield from upload(url="""https://www.codechef.com/users/{}""",)
+        T = yield from upload(
+            url="""https://www.codechef.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Codewars():
-        T = yield from upload(url="""https://www.codewars.com/users/{}""",)
+        T = yield from upload(
+            url="""https://www.codewars.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -557,84 +627,108 @@ class Extractor:
 
     @staticmethod
     def Coroflot():
-        T = yield from upload(url="""https://www.coroflot.com/{}""",)
+        T = yield from upload(
+            url="""https://www.coroflot.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Cracked():
-        T = yield from upload(url="""https://www.cracked.com/members/{}/""",)
+        T = yield from upload(
+            url="""https://www.cracked.com/members/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Crevado():
-        T = yield from upload(url="""https://{}.crevado.com""",)
+        T = yield from upload(
+            url="""https://{}.crevado.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Crunchyroll():
-        T = yield from upload(url="""https://www.crunchyroll.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.crunchyroll.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def DEV_Community():
-        T = yield from upload(url="""https://dev.to/{}""",)
+        T = yield from upload(
+            url="""https://dev.to/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def DailyMotion():
-        T = yield from upload(url="""https://www.dailymotion.com/{}""",)
+        T = yield from upload(
+            url="""https://www.dailymotion.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Designspiration():
-        T = yield from upload(url="""https://www.designspiration.net/{}/""",)
+        T = yield from upload(
+            url="""https://www.designspiration.net/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def DeviantART():
-        T = yield from upload(url="""https://{}.deviantart.com""",)
+        T = yield from upload(
+            url="""https://{}.deviantart.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Discogs():
-        T = yield from upload(url="""https://www.discogs.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.discogs.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Discuss_Elastic_co():
-        T = yield from upload(url="""https://discuss.elastic.co/u/{}""",)
+        T = yield from upload(
+            url="""https://discuss.elastic.co/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Disqus():
-        T = yield from upload(url="""https://disqus.com/{}""",)
+        T = yield from upload(
+            url="""https://disqus.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Docker_Hub():
-        T = yield from upload(url="""https://hub.docker.com/u/{}/""",)
+        T = yield from upload(
+            url="""https://hub.docker.com/u/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -685,7 +779,9 @@ class Extractor:
 
     @staticmethod
     def Etsy():
-        T = yield from upload(url="""https://www.etsy.com/shop/{}""",)
+        T = yield from upload(
+            url="""https://www.etsy.com/shop/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -703,70 +799,90 @@ class Extractor:
 
     @staticmethod
     def EyeEm():
-        T = yield from upload(url="""https://www.eyeem.com/u/{}""",)
+        T = yield from upload(
+            url="""https://www.eyeem.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def F3_cool():
-        T = yield from upload(url="""https://f3.cool/{}/""",)
+        T = yield from upload(
+            url="""https://f3.cool/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Facebook():
-        T = yield from upload(url="""https://www.facebook.com/{}""",)
+        T = yield from upload(
+            url="""https://www.facebook.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Facenama():
-        T = yield from upload(url="""https://facenama.com/{}""",)
+        T = yield from upload(
+            url="""https://facenama.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Fandom():
-        T = yield from upload(url="""https://www.fandom.com/u/{}""",)
+        T = yield from upload(
+            url="""https://www.fandom.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Filmogs():
-        T = yield from upload(url="""https://www.filmo.gs/users/{}""",)
+        T = yield from upload(
+            url="""https://www.filmo.gs/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Fiverr():
-        T = yield from upload(url="""https://www.fiverr.com/{}""",)
+        T = yield from upload(
+            url="""https://www.fiverr.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Flickr():
-        T = yield from upload(url="""https://www.flickr.com/people/{}""",)
+        T = yield from upload(
+            url="""https://www.flickr.com/people/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Flightradar24():
-        T = yield from upload(url="""https://my.flightradar24.com/{}""",)
+        T = yield from upload(
+            url="""https://my.flightradar24.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Flipboard():
-        T = yield from upload(url="""https://flipboard.com/@{}""",)
+        T = yield from upload(
+            url="""https://flipboard.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -784,7 +900,9 @@ class Extractor:
 
     @staticmethod
     def FortniteTracker():
-        T = yield from upload(url="""https://fortnitetracker.com/profile/all/{}""",)
+        T = yield from upload(
+            url="""https://fortnitetracker.com/profile/all/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -813,35 +931,45 @@ class Extractor:
 
     @staticmethod
     def Freesound():
-        T = yield from upload(url="""https://freesound.org/people/{}/""",)
+        T = yield from upload(
+            url="""https://freesound.org/people/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def GDProfiles():
-        T = yield from upload(url="""https://gdprofiles.com/{}""",)
+        T = yield from upload(
+            url="""https://gdprofiles.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Gamespot():
-        T = yield from upload(url="""https://www.gamespot.com/profile/{}/""",)
+        T = yield from upload(
+            url="""https://www.gamespot.com/profile/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Giphy():
-        T = yield from upload(url="""https://giphy.com/{}""",)
+        T = yield from upload(
+            url="""https://giphy.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def GitHub():
-        T = yield from upload(url="""https://www.github.com/{}""",)
+        T = yield from upload(
+            url="""https://www.github.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -849,7 +977,9 @@ class Extractor:
     @staticmethod
     def GitLab():
         T = yield from upload(
-            url="""https://gitlab.com/{}""", error_type="text", error_msg="""[]""",
+            url="""https://gitlab.com/{}""",
+            error_type="text",
+            error_msg="""[]""",
         )
 
         T.title = T.html.pq("title").text()
@@ -857,21 +987,27 @@ class Extractor:
 
     @staticmethod
     def Gitee():
-        T = yield from upload(url="""https://gitee.com/{}""",)
+        T = yield from upload(
+            url="""https://gitee.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def GoodReads():
-        T = yield from upload(url="""https://www.goodreads.com/{}""",)
+        T = yield from upload(
+            url="""https://www.goodreads.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Gravatar():
-        T = yield from upload(url="""http://en.gravatar.com/{}""",)
+        T = yield from upload(
+            url="""http://en.gravatar.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -889,21 +1025,27 @@ class Extractor:
 
     @staticmethod
     def GunsAndAmmo():
-        T = yield from upload(url="""https://forums.gunsandammo.com/profile/{}""",)
+        T = yield from upload(
+            url="""https://forums.gunsandammo.com/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def GuruShots():
-        T = yield from upload(url="""https://gurushots.com/{}/photos""",)
+        T = yield from upload(
+            url="""https://gurushots.com/{}/photos""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def HackTheBox():
-        T = yield from upload(url="""https://forum.hackthebox.eu/profile/{}""",)
+        T = yield from upload(
+            url="""https://forum.hackthebox.eu/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -965,7 +1107,9 @@ class Extractor:
 
     @staticmethod
     def HubPages():
-        T = yield from upload(url="""https://hubpages.com/@{}""",)
+        T = yield from upload(
+            url="""https://hubpages.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -994,21 +1138,27 @@ class Extractor:
 
     @staticmethod
     def ImageShack():
-        T = yield from upload(url="""https://imageshack.us/user/{}""",)
+        T = yield from upload(
+            url="""https://imageshack.us/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def ImgUp_cz():
-        T = yield from upload(url="""https://imgup.cz/{}""",)
+        T = yield from upload(
+            url="""https://imgup.cz/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Instagram():
-        T = yield from upload(url="""https://www.instagram.com/{}""",)
+        T = yield from upload(
+            url="""https://www.instagram.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1026,28 +1176,36 @@ class Extractor:
 
     @staticmethod
     def Issuu():
-        T = yield from upload(url="""https://issuu.com/{}""",)
+        T = yield from upload(
+            url="""https://issuu.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Itch_io():
-        T = yield from upload(url="""https://{}.itch.io/""",)
+        T = yield from upload(
+            url="""https://{}.itch.io/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Jimdo():
-        T = yield from upload(url="""https://{}.jimdosite.com""",)
+        T = yield from upload(
+            url="""https://{}.jimdosite.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Kaggle():
-        T = yield from upload(url="""https://www.kaggle.com/{}""",)
+        T = yield from upload(
+            url="""https://www.kaggle.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1065,14 +1223,18 @@ class Extractor:
 
     @staticmethod
     def KanoWorld():
-        T = yield from upload(url="""https://api.kano.me/progress/user/{}""",)
+        T = yield from upload(
+            url="""https://api.kano.me/progress/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Keybase():
-        T = yield from upload(url="""https://keybase.io/{}""",)
+        T = yield from upload(
+            url="""https://keybase.io/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1101,21 +1263,27 @@ class Extractor:
 
     @staticmethod
     def LOR():
-        T = yield from upload(url="""https://www.linux.org.ru/people/{}/profile""",)
+        T = yield from upload(
+            url="""https://www.linux.org.ru/people/{}/profile""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Launchpad():
-        T = yield from upload(url="""https://launchpad.net/~{}""",)
+        T = yield from upload(
+            url="""https://launchpad.net/~{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def LeetCode():
-        T = yield from upload(url="""https://leetcode.com/{}""",)
+        T = yield from upload(
+            url="""https://leetcode.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1144,7 +1312,9 @@ class Extractor:
 
     @staticmethod
     def LiveJournal():
-        T = yield from upload(url="""https://{}.livejournal.com""",)
+        T = yield from upload(
+            url="""https://{}.livejournal.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1162,7 +1332,9 @@ class Extractor:
 
     @staticmethod
     def Lobsters():
-        T = yield from upload(url="""https://lobste.rs/u/{}""",)
+        T = yield from upload(
+            url="""https://lobste.rs/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1180,42 +1352,54 @@ class Extractor:
 
     @staticmethod
     def Medium():
-        T = yield from upload(url="""https://medium.com/@{}""",)
+        T = yield from upload(
+            url="""https://medium.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def MeetMe():
-        T = yield from upload(url="""https://www.meetme.com/{}""",)
+        T = yield from upload(
+            url="""https://www.meetme.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Memrise():
-        T = yield from upload(url="""https://www.memrise.com/user/{}/""",)
+        T = yield from upload(
+            url="""https://www.memrise.com/user/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def MixCloud():
-        T = yield from upload(url="""https://www.mixcloud.com/{}/""",)
+        T = yield from upload(
+            url="""https://www.mixcloud.com/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def MyAnimeList():
-        T = yield from upload(url="""https://myanimelist.net/profile/{}""",)
+        T = yield from upload(
+            url="""https://myanimelist.net/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Myspace():
-        T = yield from upload(url="""https://myspace.com/{}""",)
+        T = yield from upload(
+            url="""https://myspace.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1233,14 +1417,18 @@ class Extractor:
 
     @staticmethod
     def NPM():
-        T = yield from upload(url="""https://www.npmjs.com/~{}""",)
+        T = yield from upload(
+            url="""https://www.npmjs.com/~{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def NPM_Package():
-        T = yield from upload(url="""https://www.npmjs.com/package/{}""",)
+        T = yield from upload(
+            url="""https://www.npmjs.com/package/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1280,42 +1468,54 @@ class Extractor:
 
     @staticmethod
     def Newgrounds():
-        T = yield from upload(url="""https://{}.newgrounds.com""",)
+        T = yield from upload(
+            url="""https://{}.newgrounds.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def OK():
-        T = yield from upload(url="""https://ok.ru/{}""",)
+        T = yield from upload(
+            url="""https://ok.ru/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def OpenCollective():
-        T = yield from upload(url="""https://opencollective.com/{}""",)
+        T = yield from upload(
+            url="""https://opencollective.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def OpenStreetMap():
-        T = yield from upload(url="""https://www.openstreetmap.org/user/{}""",)
+        T = yield from upload(
+            url="""https://www.openstreetmap.org/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Oracle_Community():
-        T = yield from upload(url="""https://community.oracle.com/people/{}""",)
+        T = yield from upload(
+            url="""https://community.oracle.com/people/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Otzovik():
-        T = yield from upload(url="""https://otzovik.com/profile/{}""",)
+        T = yield from upload(
+            url="""https://otzovik.com/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1344,63 +1544,81 @@ class Extractor:
 
     @staticmethod
     def PCPartPicker():
-        T = yield from upload(url="""https://pcpartpicker.com/user/{}""",)
+        T = yield from upload(
+            url="""https://pcpartpicker.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def PSNProfiles_com():
-        T = yield from upload(url="""https://psnprofiles.com/{}""",)
+        T = yield from upload(
+            url="""https://psnprofiles.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Packagist():
-        T = yield from upload(url="""https://packagist.org/packages/{}/""",)
+        T = yield from upload(
+            url="""https://packagist.org/packages/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Pastebin():
-        T = yield from upload(url="""https://pastebin.com/u/{}""",)
+        T = yield from upload(
+            url="""https://pastebin.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Patreon():
-        T = yield from upload(url="""https://www.patreon.com/{}""",)
+        T = yield from upload(
+            url="""https://www.patreon.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Periscope():
-        T = yield from upload(url="""https://www.periscope.tv/{}/""",)
+        T = yield from upload(
+            url="""https://www.periscope.tv/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Photobucket():
-        T = yield from upload(url="""https://photobucket.com/user/{}/library""",)
+        T = yield from upload(
+            url="""https://photobucket.com/user/{}/library""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Pinkbike():
-        T = yield from upload(url="""https://www.pinkbike.com/u/{}/""",)
+        T = yield from upload(
+            url="""https://www.pinkbike.com/u/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Pinterest():
-        T = yield from upload(url="""https://www.pinterest.com/{}/""",)
+        T = yield from upload(
+            url="""https://www.pinterest.com/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1416,35 +1634,45 @@ class Extractor:
 
     @staticmethod
     def Pling():
-        T = yield from upload(url="""https://www.pling.com/u/{}/""",)
+        T = yield from upload(
+            url="""https://www.pling.com/u/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Plug_DJ():
-        T = yield from upload(url="""https://plug.dj/@/{}""",)
+        T = yield from upload(
+            url="""https://plug.dj/@/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Pokemon_Showdown():
-        T = yield from upload(url="""https://pokemonshowdown.com/users/{}""",)
+        T = yield from upload(
+            url="""https://pokemonshowdown.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def PokerStrategy():
-        T = yield from upload(url="""http://www.pokerstrategy.net/user/{}/profile/""",)
+        T = yield from upload(
+            url="""http://www.pokerstrategy.net/user/{}/profile/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Polygon():
-        T = yield from upload(url="""https://www.polygon.com/users/{}""",)
+        T = yield from upload(
+            url="""https://www.polygon.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1462,28 +1690,36 @@ class Extractor:
 
     @staticmethod
     def PromoDJ():
-        T = yield from upload(url="""http://promodj.com/{}""",)
+        T = yield from upload(
+            url="""http://promodj.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Quora():
-        T = yield from upload(url="""https://www.quora.com/profile/{}""",)
+        T = yield from upload(
+            url="""https://www.quora.com/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Rajce_net():
-        T = yield from upload(url="""https://{}.rajce.idnes.cz/""",)
+        T = yield from upload(
+            url="""https://{}.rajce.idnes.cz/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Rate_Your_Music():
-        T = yield from upload(url="""https://rateyourmusic.com/~{}""",)
+        T = yield from upload(
+            url="""https://rateyourmusic.com/~{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1501,14 +1737,18 @@ class Extractor:
 
     @staticmethod
     def Redbubble():
-        T = yield from upload(url="""https://www.redbubble.com/people/{}""",)
+        T = yield from upload(
+            url="""https://www.redbubble.com/people/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Reddit():
-        T = yield from upload(url="""https://www.reddit.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.reddit.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1516,7 +1756,9 @@ class Extractor:
     @staticmethod
     def Repl_it():
         T = yield from upload(
-            url="""https://repl.it/@{}""", error_type="text", error_msg="""404""",
+            url="""https://repl.it/@{}""",
+            error_type="text",
+            error_msg="""404""",
         )
 
         T.title = T.html.pq("title").text()
@@ -1524,7 +1766,9 @@ class Extractor:
 
     @staticmethod
     def ResearchGate():
-        T = yield from upload(url="""https://www.researchgate.net/profile/{}""",)
+        T = yield from upload(
+            url="""https://www.researchgate.net/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1553,21 +1797,27 @@ class Extractor:
 
     @staticmethod
     def RubyGems():
-        T = yield from upload(url="""https://rubygems.org/profiles/{}""",)
+        T = yield from upload(
+            url="""https://rubygems.org/profiles/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Sbazar_cz():
-        T = yield from upload(url="""https://www.sbazar.cz/{}""",)
+        T = yield from upload(
+            url="""https://www.sbazar.cz/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Scratch():
-        T = yield from upload(url="""https://scratch.mit.edu/users/{}""",)
+        T = yield from upload(
+            url="""https://scratch.mit.edu/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1585,7 +1835,9 @@ class Extractor:
 
     @staticmethod
     def ShitpostBot5000():
-        T = yield from upload(url="""https://www.shitpostbot.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.shitpostbot.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1603,42 +1855,54 @@ class Extractor:
 
     @staticmethod
     def Slack():
-        T = yield from upload(url="""https://{}.slack.com""",)
+        T = yield from upload(
+            url="""https://{}.slack.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def SlideShare():
-        T = yield from upload(url="""https://slideshare.net/{}""",)
+        T = yield from upload(
+            url="""https://slideshare.net/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Smashcast():
-        T = yield from upload(url="""https://www.smashcast.tv/api/media/live/{}""",)
+        T = yield from upload(
+            url="""https://www.smashcast.tv/api/media/live/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Smule():
-        T = yield from upload(url="""https://www.smule.com/{}""",)
+        T = yield from upload(
+            url="""https://www.smule.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def SoundCloud():
-        T = yield from upload(url="""https://soundcloud.com/{}""",)
+        T = yield from upload(
+            url="""https://soundcloud.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def SourceForge():
-        T = yield from upload(url="""https://sourceforge.net/u/{}""",)
+        T = yield from upload(
+            url="""https://sourceforge.net/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1656,35 +1920,45 @@ class Extractor:
 
     @staticmethod
     def Splits_io():
-        T = yield from upload(url="""https://splits.io/users/{}""",)
+        T = yield from upload(
+            url="""https://splits.io/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Sporcle():
-        T = yield from upload(url="""https://www.sporcle.com/user/{}/people""",)
+        T = yield from upload(
+            url="""https://www.sporcle.com/user/{}/people""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def SportsRU():
-        T = yield from upload(url="""https://www.sports.ru/profile/{}/""",)
+        T = yield from upload(
+            url="""https://www.sports.ru/profile/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Spotify():
-        T = yield from upload(url="""https://open.spotify.com/user/{}""",)
+        T = yield from upload(
+            url="""https://open.spotify.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Star_Citizen():
-        T = yield from upload(url="""https://robertsspaceindustries.com/citizens/{}""",)
+        T = yield from upload(
+            url="""https://robertsspaceindustries.com/citizens/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1724,28 +1998,36 @@ class Extractor:
 
     @staticmethod
     def SublimeForum():
-        T = yield from upload(url="""https://forum.sublimetext.com/u/{}""",)
+        T = yield from upload(
+            url="""https://forum.sublimetext.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def T_MobileSupport():
-        T = yield from upload(url="""https://support.t-mobile.com/people/{}""",)
+        T = yield from upload(
+            url="""https://support.t-mobile.com/people/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Taringa():
-        T = yield from upload(url="""https://www.taringa.net/{}""",)
+        T = yield from upload(
+            url="""https://www.taringa.net/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Tellonym_me():
-        T = yield from upload(url="""https://tellonym.me/{}""",)
+        T = yield from upload(
+            url="""https://tellonym.me/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1774,14 +2056,18 @@ class Extractor:
 
     @staticmethod
     def TradingView():
-        T = yield from upload(url="""https://www.tradingview.com/u/{}/""",)
+        T = yield from upload(
+            url="""https://www.tradingview.com/u/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Trakt():
-        T = yield from upload(url="""https://www.trakt.tv/users/{}""",)
+        T = yield from upload(
+            url="""https://www.trakt.tv/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1821,7 +2107,9 @@ class Extractor:
 
     @staticmethod
     def Twitch():
-        T = yield from upload(url="""https://www.twitch.tv/{}""",)
+        T = yield from upload(
+            url="""https://www.twitch.tv/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1839,28 +2127,36 @@ class Extractor:
 
     @staticmethod
     def Ultimate_Guitar():
-        T = yield from upload(url="""https://ultimate-guitar.com/u/{}""",)
+        T = yield from upload(
+            url="""https://ultimate-guitar.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Unsplash():
-        T = yield from upload(url="""https://unsplash.com/@{}""",)
+        T = yield from upload(
+            url="""https://unsplash.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def VK():
-        T = yield from upload(url="""https://vk.com/{}""",)
+        T = yield from upload(
+            url="""https://vk.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def VSCO():
-        T = yield from upload(url="""https://vsco.co/{}""",)
+        T = yield from upload(
+            url="""https://vsco.co/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1878,21 +2174,27 @@ class Extractor:
 
     @staticmethod
     def Venmo():
-        T = yield from upload(url="""https://venmo.com/{}""",)
+        T = yield from upload(
+            url="""https://venmo.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Viadeo():
-        T = yield from upload(url="""http://fr.viadeo.com/en/profile/{}""",)
+        T = yield from upload(
+            url="""http://fr.viadeo.com/en/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Vimeo():
-        T = yield from upload(url="""https://vimeo.com/{}""",)
+        T = yield from upload(
+            url="""https://vimeo.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1900,7 +2202,9 @@ class Extractor:
     @staticmethod
     def Virgool():
         T = yield from upload(
-            url="""https://virgool.io/@{}""", error_type="text", error_msg="""۴۰۴""",
+            url="""https://virgool.io/@{}""",
+            error_type="text",
+            error_msg="""۴۰۴""",
         )
 
         T.title = T.html.pq("title").text()
@@ -1941,14 +2245,18 @@ class Extractor:
 
     @staticmethod
     def WebNode():
-        T = yield from upload(url="""https://{}.webnode.cz/""",)
+        T = yield from upload(
+            url="""https://{}.webnode.cz/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Whonix_Forum():
-        T = yield from upload(url="""https://forums.whonix.org/u/{}""",)
+        T = yield from upload(
+            url="""https://forums.whonix.org/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -1977,28 +2285,36 @@ class Extractor:
 
     @staticmethod
     def Wix():
-        T = yield from upload(url="""https://{}.wix.com""",)
+        T = yield from upload(
+            url="""https://{}.wix.com""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def WordPress():
-        T = yield from upload(url="""https://{}.wordpress.com/""",)
+        T = yield from upload(
+            url="""https://{}.wordpress.com/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def WordPressOrg():
-        T = yield from upload(url="""https://profiles.wordpress.org/{}/""",)
+        T = yield from upload(
+            url="""https://profiles.wordpress.org/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def YandexCollection():
-        T = yield from upload(url="""https://yandex.ru/collections/user/{}/""",)
+        T = yield from upload(
+            url="""https://yandex.ru/collections/user/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2016,21 +2332,27 @@ class Extractor:
 
     @staticmethod
     def YouPic():
-        T = yield from upload(url="""https://youpic.com/photographer/{}/""",)
+        T = yield from upload(
+            url="""https://youpic.com/photographer/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def Zomato():
-        T = yield from upload(url="""https://www.zomato.com/pl/{}/foodjourney""",)
+        T = yield from upload(
+            url="""https://www.zomato.com/pl/{}/foodjourney""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def akniga():
-        T = yield from upload(url="""https://akniga.org/profile/{}""",)
+        T = yield from upload(
+            url="""https://akniga.org/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2048,7 +2370,9 @@ class Extractor:
 
     @staticmethod
     def authorSTREAM():
-        T = yield from upload(url="""http://www.authorstream.com/{}/""",)
+        T = yield from upload(
+            url="""http://www.authorstream.com/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2066,84 +2390,108 @@ class Extractor:
 
     @staticmethod
     def babyblogRU():
-        T = yield from upload(url="""https://www.babyblog.ru/user/info/{}""",)
+        T = yield from upload(
+            url="""https://www.babyblog.ru/user/info/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def chaos_social():
-        T = yield from upload(url="""https://chaos.social/@{}""",)
+        T = yield from upload(
+            url="""https://chaos.social/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def couchsurfing():
-        T = yield from upload(url="""https://www.couchsurfing.com/people/{}""",)
+        T = yield from upload(
+            url="""https://www.couchsurfing.com/people/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def d3RU():
-        T = yield from upload(url="""https://d3.ru/user/{}/posts""",)
+        T = yield from upload(
+            url="""https://d3.ru/user/{}/posts""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def dailykos():
-        T = yield from upload(url="""https://www.dailykos.com/user/{}""",)
+        T = yield from upload(
+            url="""https://www.dailykos.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def datingRU():
-        T = yield from upload(url="""http://dating.ru/{}""",)
+        T = yield from upload(
+            url="""http://dating.ru/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def devRant():
-        T = yield from upload(url="""https://devrant.com/users/{}""",)
+        T = yield from upload(
+            url="""https://devrant.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def drive2():
-        T = yield from upload(url="""https://www.drive2.ru/users/{}""",)
+        T = yield from upload(
+            url="""https://www.drive2.ru/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def eGPU():
-        T = yield from upload(url="""https://egpu.io/forums/profile/{}/""",)
+        T = yield from upload(
+            url="""https://egpu.io/forums/profile/{}/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def eintracht():
-        T = yield from upload(url="""https://community.eintracht.de/fans/{}""",)
+        T = yield from upload(
+            url="""https://community.eintracht.de/fans/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def fixya():
-        T = yield from upload(url="""https://www.fixya.com/users/{}""",)
+        T = yield from upload(
+            url="""https://www.fixya.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def fl():
-        T = yield from upload(url="""https://www.fl.ru/users/{}""",)
+        T = yield from upload(
+            url="""https://www.fl.ru/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2172,28 +2520,36 @@ class Extractor:
 
     @staticmethod
     def geocaching():
-        T = yield from upload(url="""https://www.geocaching.com/profile/?u={}""",)
+        T = yield from upload(
+            url="""https://www.geocaching.com/profile/?u={}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def gfycat():
-        T = yield from upload(url="""https://gfycat.com/@{}""",)
+        T = yield from upload(
+            url="""https://gfycat.com/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def habr():
-        T = yield from upload(url="""https://habr.com/ru/users/{}""",)
+        T = yield from upload(
+            url="""https://habr.com/ru/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def hackster():
-        T = yield from upload(url="""https://www.hackster.io/{}""",)
+        T = yield from upload(
+            url="""https://www.hackster.io/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2211,7 +2567,9 @@ class Extractor:
 
     @staticmethod
     def iMGSRC_RU():
-        T = yield from upload(url="""https://imgsrc.ru/main/user.php?user={}""",)
+        T = yield from upload(
+            url="""https://imgsrc.ru/main/user.php?user={}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2240,7 +2598,9 @@ class Extractor:
 
     @staticmethod
     def irecommend():
-        T = yield from upload(url="""https://irecommend.ru/users/{}""",)
+        T = yield from upload(
+            url="""https://irecommend.ru/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2258,63 +2618,81 @@ class Extractor:
 
     @staticmethod
     def kwork():
-        T = yield from upload(url="""https://kwork.ru/user/{}""",)
+        T = yield from upload(
+            url="""https://kwork.ru/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def labpentestit():
-        T = yield from upload(url="""https://lab.pentestit.ru/profile/{}""",)
+        T = yield from upload(
+            url="""https://lab.pentestit.ru/profile/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def last_fm():
-        T = yield from upload(url="""https://last.fm/user/{}""",)
+        T = yield from upload(
+            url="""https://last.fm/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def leasehackr():
-        T = yield from upload(url="""https://forum.leasehackr.com/u/{}/summary/""",)
+        T = yield from upload(
+            url="""https://forum.leasehackr.com/u/{}/summary/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def livelib():
-        T = yield from upload(url="""https://www.livelib.ru/reader/{}""",)
+        T = yield from upload(
+            url="""https://www.livelib.ru/reader/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mastodon_cloud():
-        T = yield from upload(url="""https://mastodon.cloud/@{}""",)
+        T = yield from upload(
+            url="""https://mastodon.cloud/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mastodon_social():
-        T = yield from upload(url="""https://mastodon.social/@{}""",)
+        T = yield from upload(
+            url="""https://mastodon.social/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mastodon_technology():
-        T = yield from upload(url="""https://mastodon.technology/@{}""",)
+        T = yield from upload(
+            url="""https://mastodon.technology/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mastodon_xyz():
-        T = yield from upload(url="""https://mastodon.xyz/@{}""",)
+        T = yield from upload(
+            url="""https://mastodon.xyz/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2332,49 +2710,63 @@ class Extractor:
 
     @staticmethod
     def mixer_com():
-        T = yield from upload(url="""https://mixer.com/{}""",)
+        T = yield from upload(
+            url="""https://mixer.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def moikrug():
-        T = yield from upload(url="""https://moikrug.ru/{}""",)
+        T = yield from upload(
+            url="""https://moikrug.ru/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mstdn_io():
-        T = yield from upload(url="""https://mstdn.io/@{}""",)
+        T = yield from upload(
+            url="""https://mstdn.io/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def nightbot():
-        T = yield from upload(url="""https://nightbot.tv/t/{}/commands""",)
+        T = yield from upload(
+            url="""https://nightbot.tv/t/{}/commands""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def nnRU():
-        T = yield from upload(url="""https://{}.www.nn.ru/""",)
+        T = yield from upload(
+            url="""https://{}.www.nn.ru/""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def notabug_org():
-        T = yield from upload(url="""https://notabug.org/{}""",)
+        T = yield from upload(
+            url="""https://notabug.org/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def note():
-        T = yield from upload(url="""https://note.com/{}""",)
+        T = yield from upload(
+            url="""https://note.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2392,14 +2784,18 @@ class Extractor:
 
     @staticmethod
     def opensource():
-        T = yield from upload(url="""https://opensource.com/users/{}""",)
+        T = yield from upload(
+            url="""https://opensource.com/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def osu_():
-        T = yield from upload(url="""https://osu.ppy.sh/users/{}""",)
+        T = yield from upload(
+            url="""https://osu.ppy.sh/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2417,42 +2813,54 @@ class Extractor:
 
     @staticmethod
     def pikabu():
-        T = yield from upload(url="""https://pikabu.ru/@{}""",)
+        T = yield from upload(
+            url="""https://pikabu.ru/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def pr0gramm():
-        T = yield from upload(url="""https://pr0gramm.com/api/profile/info?name={}""",)
+        T = yield from upload(
+            url="""https://pr0gramm.com/api/profile/info?name={}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def radio_echo_msk():
-        T = yield from upload(url="""https://echo.msk.ru/users/{}""",)
+        T = yield from upload(
+            url="""https://echo.msk.ru/users/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def satsisRU():
-        T = yield from upload(url="""https://satsis.info/user/{}""",)
+        T = yield from upload(
+            url="""https://satsis.info/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def segmentfault():
-        T = yield from upload(url="""https://segmentfault.com/u/{}""",)
+        T = yield from upload(
+            url="""https://segmentfault.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def social_tchncs_de():
-        T = yield from upload(url="""https://social.tchncs.de/@{}""",)
+        T = yield from upload(
+            url="""https://social.tchncs.de/@{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2481,21 +2889,27 @@ class Extractor:
 
     @staticmethod
     def spletnik():
-        T = yield from upload(url="""https://spletnik.ru/user/{}""",)
+        T = yield from upload(
+            url="""https://spletnik.ru/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def svidbook():
-        T = yield from upload(url="""https://www.svidbook.ru/user/{}""",)
+        T = yield from upload(
+            url="""https://www.svidbook.ru/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def toster():
-        T = yield from upload(url="""https://www.toster.ru/user/{}/answers""",)
+        T = yield from upload(
+            url="""https://www.toster.ru/user/{}/answers""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
@@ -2524,42 +2938,54 @@ class Extractor:
 
     @staticmethod
     def uid():
-        T = yield from upload(url="""http://uid.me/{}""",)
+        T = yield from upload(
+            url="""http://uid.me/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def warriorforum():
-        T = yield from upload(url="""https://www.warriorforum.com/members/{}.html""",)
+        T = yield from upload(
+            url="""https://www.warriorforum.com/members/{}.html""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def windy():
-        T = yield from upload(url="""https://community.windy.com/user/{}""",)
+        T = yield from upload(
+            url="""https://community.windy.com/user/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def mercadolivre():
-        T = yield from upload(url="""https://www.mercadolivre.com.br/perfil/{}""",)
+        T = yield from upload(
+            url="""https://www.mercadolivre.com.br/perfil/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def kofi():
-        T = yield from upload(url="""https://ko-fi.com/{}""",)
+        T = yield from upload(
+            url="""https://ko-fi.com/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T
 
     @staticmethod
     def aminoapp():
-        T = yield from upload(url="""https://aminoapps.com/u/{}""",)
+        T = yield from upload(
+            url="""https://aminoapps.com/u/{}""",
+        )
 
         T.title = T.html.pq("title").text()
         yield T

@@ -15,7 +15,7 @@ from sharingan.log import info
 
 def init_dir(path: pathlib.Path) -> pathlib.Path:
     """
-        specified a directory and init it
+    specified a directory and init it
     """
     path.mkdir(exist_ok=True)
     return path
@@ -29,7 +29,7 @@ def str_to_num(strs: str) -> int or str:
 
 def status_print(resp, txt) -> str:
     """
-        print crawled results with different status color
+    print crawled results with different status color
     """
     maps = {
         "1": lambda txt: colored(txt, "blue"),
@@ -44,7 +44,7 @@ def status_print(resp, txt) -> str:
 @retry(tries=3)
 def extract_maker_with_sherlock():
     """
-        create extract model from sherlock config.json
+    create extract model from sherlock config.json
     """
     URLCODE = "__URLCODE__"
     reg = re.compile(f"[{string.punctuation+string.whitespace}]")

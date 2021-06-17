@@ -10,12 +10,12 @@ from json import dumps, loads
 from pathlib import Path
 from pprint import pprint
 from typing import Dict, List, Set
-import uvloop
 
 import click
 import httpx
 import moment
 import pypeln as pl
+import uvloop
 from requests_html import HTML
 
 from sharingan.common import init_dir, status_print
@@ -63,7 +63,7 @@ class StareAt:
 
     def __post_init__(self):
         """
-            other datas init
+        other datas init
         """
         if self.singel:
             try:
@@ -94,7 +94,7 @@ class StareAt:
 
     async def single(self, datas: tuple) -> None:
         """
-            singel proccess to get target data
+        singel proccess to get target data
         """
         key, indexs, target, data = datas
         try:
@@ -134,10 +134,10 @@ class StareAt:
 
     def assert_proccess(self, resp: httpx.Response, data: person) -> None:
         """
-            check what if data is ok
-            arguments
-                resp: response from server
-                data: extra target config
+        check what if data is ok
+        arguments
+            resp: response from server
+            data: extra target config
         """
 
         def single(data: person) -> None:
@@ -161,7 +161,7 @@ class StareAt:
 
     async def fetch_image_b64(self, client: httpx.AsyncClient, url: str) -> str:
         """
-            download an images and covert to base64 encoding 
+        download an images and covert to base64 encoding
         """
         resp = await client.get(url)
         if (
@@ -174,7 +174,7 @@ class StareAt:
         self, client: httpx.AsyncClient, data: person, limits: int = 10
     ) -> None:
         """
-            download images which necssary , and encode with base64
+        download images which necssary , and encode with base64
         """
         times = 0
         for key in self.image_available_key:
@@ -192,7 +192,7 @@ class StareAt:
 
     async def loop(self) -> None:
         """
-            proccessing all tasks
+        proccessing all tasks
         """
         tasks = []
         for indexs, key in enumerate(self.sites):
@@ -207,7 +207,7 @@ class StareAt:
 
     def save(self) -> None:
         """
-            save or export the results
+        save or export the results
         """
         save_flag = False
         for key, val in self.datas.items():

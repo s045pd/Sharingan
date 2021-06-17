@@ -8,28 +8,23 @@
     <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 </p>
 
-
-
-
 # 环境安装
 
-首先保证您已经安装了```python3.8```及以上版本,然后依次运行如下命令。
+首先保证您已经安装了`python3.8`及以上版本,然后依次运行如下命令。
 
 ```sh
 git clone https://github.com/aoii103/Sharingan.git
 
 cd sharingan
 
-python3 setup.py install 
+python3 setup.py install
 ```
 
-或通过pip安装
+或通过 pip 安装
 
 ```bash
 pip install sharingan
 ```
-
-
 
 # 案例用法
 
@@ -51,19 +46,18 @@ python3 -m sharingan blue
 
 可选配置详见 [`models.py`](https://github.com/aoii103/Sharingan/blob/master/sharingan/models.py#L25)
 
-
 ```python
 
     @staticmethod
     def __example() -> Generator:
         """
             1. <-- yield your config first
-            2. --> then got your datas back 
+            2. --> then got your datas back
             3. <-- finally, yield the extracted data back
         """
         T = yield from upload(
             **{
-                "url": "http://xxxx", 
+                "url": "http://xxxx",
             }
         )
 
@@ -94,10 +88,9 @@ python3 -m sharingan larry --singel=twitter
 python3 -m sharingan.common
 ```
 
-然后它将创建一个叫`templates.py`的python脚本
+然后它将创建一个叫`templates.py`的 python 脚本
 
 我们将其中的代码替换到 `extract.py`的相应位置即可
-
 
 # 选项
 
@@ -115,10 +108,9 @@ Options:
   --debug            开发者模式
   --update           将以更新的方式写入原有文件
   --workers INTEGER  异步worker数量
-  --help             打印帮助文档 
+  --help             打印帮助文档
 
 ```
-
 
 # TODO
 
@@ -128,6 +120,6 @@ Options:
 
 This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
 
-***
+---
 
-如果您觉得这个脚本对您有用，可别忘了star哟🐶。灵感来自 ❤️ [sherlock](https://github.com/sherlock-project/sherlock)
+如果您觉得这个脚本对您有用，可别忘了 star 哟 🐶。灵感来自 ❤️ [sherlock](https://github.com/sherlock-project/sherlock)
