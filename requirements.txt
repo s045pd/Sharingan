@@ -4,5 +4,5 @@ retry==0.9.2
 Click==7.0
 termcolor==1.1.0
 python_box==4.2.3
-httpx==0.13.3
+httpx==0.23.0
 pypeln==0.4.4

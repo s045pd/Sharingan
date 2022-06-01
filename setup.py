@@ -26,7 +26,7 @@ setuptools.setup(
         "requests_html==0.10.0",
         "termcolor==1.1.0",
         "Click==7.0",
-        "httpx==0.13.3",
+        "httpx==0.23.0",
         "progressbar33==2.4",
         "moment==0.8.2",
         "retry==0.9.2",
