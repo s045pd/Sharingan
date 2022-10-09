@@ -14,8 +14,6 @@ from typing import Dict, List, Set
 import click
 import httpx
 import moment
-import pypeln as pl
-import uvloop
 from requests_html import HTML
 
 from sharingan.common import init_dir, status_print
@@ -78,7 +76,9 @@ class StareAt:
         self.save_path.mkdir(exist_ok=True)
 
     def create_client(self, data: person) -> httpx.AsyncClient:
-        client = httpx.AsyncClient(http2=True, verify=False, timeout=self.max_timeout)
+        client = httpx.AsyncClient(
+            http2=True, verify=False, timeout=self.max_timeout
+        )
         client_out = httpx.AsyncClient(
             http2=True,
             verify=False,
@@ -119,7 +119,14 @@ class StareAt:
                 resp = await req
                 self.assert_proccess(resp, data)
                 pure_info = target.send(
-                    (self.name, key, resp, HTML(html=resp.text), data, self.debug)
+                    (
+                        self.name,
+                        key,
+                        resp,
+                        HTML(html=resp.text),
+                        data,
+                        self.debug,
+                    )
                 )
                 await self.loop_images(client, pure_info)
                 self.datas[key] = pure_info
@@ -159,14 +166,17 @@ class StareAt:
         assert len(e_type) == len(e_msg)
         assert not any(map(single, product(e_type, e_msg)))
 
-    async def fetch_image_b64(self, client: httpx.AsyncClient, url: str) -> str:
+    async def fetch_image_b64(
+        self, client: httpx.AsyncClient, url: str
+    ) -> str:
         """
         download an images and covert to base64 encoding
         """
         resp = await client.get(url)
         if (
             resp.status_code == 200
-            and resp.headers.get("Content-Type") in web_images._value2member_map_
+            and resp.headers.get("Content-Type")
+            in web_images._value2member_map_
         ):
             return bytes.decode(b64encode(resp.content))
 
@@ -200,10 +210,8 @@ class StareAt:
             if "__next__" not in dir(target):
                 continue
             data = next(target)
-            tasks.append((key, indexs, target, data))
-        await pl.task.map(
-            self.single, tasks, workers=self.workers, maxsize=self.max_size
-        )
+            tasks.append(self.single((key, indexs, target, data)))
+        await asyncio.gather(*tasks)
 
     def save(self) -> None:
         """
@@ -256,7 +264,9 @@ class StareAt:
     help="Proxy address in case of need to use a proxy to be used",
 )
 @click.option(
-    "--no_proxy", is_flag=True, help="All connections will be directly connected"
+    "--no_proxy",
+    is_flag=True,
+    help="All connections will be directly connected",
 )
 @click.option(
     "--save_path",
@@ -277,7 +287,9 @@ class StareAt:
 @click.option(
     "--update", is_flag=True, help="Do not overwrite the original data results"
 )
-@click.option("--workers", type=int, default=20, help="Number of concurrent workers")
+@click.option(
+    "--workers", type=int, default=20, help="Number of concurrent workers"
+)
 def main(
     name: str,
     proxy_uri: str,
