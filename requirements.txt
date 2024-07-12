@@ -17,7 +17,7 @@ hstspreload==2024.7.1
 httpcore==0.9.1
 httpx==0.13.3
 hyperframe==5.2.0
-idna==2.10
+idna==3.7
 importlib_metadata==8.0.0
 lxml==5.2.2
 lxml_html_clean==0.1.1
